@@ -1,0 +1,28 @@
+{
+  "name": "ui-devops",
+  "version": "0.0.0",
+  "description": "Shared devops tools for UI apps",
+  "main": " ",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:opolyo01/dev-ops.git"
+  },
+  "keywords": [
+    "devops"
+  ],
+  "author": "",
+  "license": "Proprietary",
+  "dependencies": {
+    "bytes": "^1.0.0",
+    "q": "^1.0.1",
+    "lodash": "^2.4.1",
+    "concat-stream": "^1.4.5",
+    "execSync": "^1.0.1-pre",
+    "connect": "^2.17.1",
+    "fs2": "^0.2.1",
+    "testee": "git://github.com/sykopomp/testee.js.git#master"
+  }
+}
