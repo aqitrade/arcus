@@ -1,0 +1,14 @@
+.DS_Store
+.idea
+.project
+bower_components/
+node_modules/
+can
+steal
+node/
+build/
+*.db
+aqi/controls/images/Thumbs.db
+production.*
+*Thumbs.db
+documentation/UIdocumentation
