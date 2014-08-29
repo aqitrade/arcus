@@ -12,6 +12,7 @@ module.exports = function(connect, options) {
 	}
 
 	_.forEach((options.services || []), function(handlerInfo, route) {
+		console.log(handlerInfo, route);
 		var handler;
 		route = handlerInfo.target || route;
 		console.log("Installing proxy handler for "+route);
