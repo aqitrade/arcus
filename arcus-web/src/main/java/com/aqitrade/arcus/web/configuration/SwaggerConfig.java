@@ -1,33 +1,30 @@
 package com.aqitrade.arcus.web.configuration;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import com.mangofactory.swagger.configuration.SpringSwaggerConfig;
-import com.mangofactory.swagger.plugin.EnableSwagger;
-import com.mangofactory.swagger.plugin.SwaggerSpringMvcPlugin;
-import com.wordnik.swagger.model.ApiInfo;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.service.ApiInfo;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;;
 
-@Configuration
-@EnableSwagger
+@EnableWebMvc
+@EnableSwagger2
+@ComponentScan("com.aqitrade.arcus.web.controller")
 public class SwaggerConfig {
-	private SpringSwaggerConfig springSwaggerConfig;
 
-	@Autowired
-	public void setSpringSwaggerConfig(SpringSwaggerConfig springSwaggerConfig) {
-		this.springSwaggerConfig = springSwaggerConfig;
-	}
+  @Bean
+  public Docket api() {
+    return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.any())
+        .build().apiInfo(apiInfo());
+  }
 
-	@Bean
-	public SwaggerSpringMvcPlugin customImplementation() {
-		return new SwaggerSpringMvcPlugin(this.springSwaggerConfig).apiInfo(
-				apiInfo()).includePatterns("/");
-	}
-
-	private ApiInfo apiInfo() {
-		ApiInfo apiInfo = new ApiInfo("AQI Trade APIs", "API for Arcus", null, null,
-				null, null);
-		return apiInfo;
-	}
+  private ApiInfo apiInfo() {
+    ApiInfo apiInfo =
+        new ApiInfo("Arcus REST API", "Arcus API Catalog, which shows endpoint details", "1.0",
+            "dev@aqitrade.com", "dev@aqitrade.com", "www.aqitrade.com", null);
+    return apiInfo;
+  }
 }

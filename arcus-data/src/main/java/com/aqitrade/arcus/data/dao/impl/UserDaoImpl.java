@@ -6,10 +6,9 @@ import com.aqitrade.arcus.data.dao.UserDao;
 import com.aqitrade.arcus.data.entity.UserEntity;
 
 @Repository
-public class UserDaoImpl extends GenericDaoImpl<UserEntity, Long> implements
-		UserDao {
+public class UserDaoImpl extends GenericDaoImpl<UserEntity, Long> implements UserDao {
 
-	public UserDaoImpl() {
-		super(UserEntity.class);
-	}
+  public UserDaoImpl() {
+    super(UserEntity.class);
+  }
 }

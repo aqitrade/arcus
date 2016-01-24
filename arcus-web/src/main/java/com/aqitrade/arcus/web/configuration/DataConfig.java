@@ -6,8 +6,8 @@ import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
-@ComponentScan(basePackages = "com.aqitrade.arcus.data")
 @Import(JPAConfig.class)
+@ComponentScan(basePackages = "com.aqitrade.arcus")
 public class DataConfig {
 
 }

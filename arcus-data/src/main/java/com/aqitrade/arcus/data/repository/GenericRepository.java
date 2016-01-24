@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface GenericRepository<ENTITY, ID extends Serializable> extends
-		JpaRepository<ENTITY, ID> {
+public interface GenericRepository<ENTITY, ID extends Serializable>
+    extends JpaRepository<ENTITY, ID> {
 
 }

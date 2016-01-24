@@ -10,4 +10,6 @@ public interface GenericService<ENTITY, DTO, ID extends Serializable> {
 	List<DTO> findAll();
 
 	void save(DTO dto);
+	
+	void delete(ID id);
 }

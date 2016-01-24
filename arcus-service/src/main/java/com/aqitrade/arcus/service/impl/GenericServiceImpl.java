@@ -9,44 +9,59 @@ import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.aqitrade.arcus.core.ErrorCodes;
+import com.aqitrade.arcus.core.exception.ServiceException;
 import com.aqitrade.arcus.data.dao.GenericDao;
 import com.aqitrade.arcus.service.GenericService;
 
 public class GenericServiceImpl<T, D, ID extends Serializable> implements GenericService<T, D, ID> {
 
-	@Autowired
-	private DozerBeanMapper mapper;
+  @Autowired
+  private DozerBeanMapper mapper;
 
-	protected Class<T> entityClass;
+  protected Class<T> entityClass;
 
-	protected Class<D> dtoClass;
+  protected Class<D> dtoClass;
 
-	GenericDao<T, ID> dao;
+  GenericDao<T, ID> dao;
 
-	@SuppressWarnings("unchecked")
-	public GenericServiceImpl(GenericDao<T, ID> dao) {
-		this.dao = dao;
-		ParameterizedType genericSuperclass = (ParameterizedType) getClass().getGenericSuperclass();
-		this.entityClass = (Class<T>) genericSuperclass.getActualTypeArguments()[0];
-		this.dtoClass = (Class<D>) genericSuperclass.getActualTypeArguments()[1];
+  @SuppressWarnings("unchecked")
+  public GenericServiceImpl(GenericDao<T, ID> dao) {
+    this.dao = dao;
+    ParameterizedType genericSuperclass = (ParameterizedType) getClass().getGenericSuperclass();
+    this.entityClass = (Class<T>) genericSuperclass.getActualTypeArguments()[0];
+    this.dtoClass = (Class<D>) genericSuperclass.getActualTypeArguments()[1];
 
-	}
+  }
 
-	public D findOne(ID id) {
-		return mapper.map(dao.get(id), dtoClass);
-	}
+  public D findOne(ID id) {
+    return mapper.map(dao.get(id), dtoClass);
+  }
 
-	public List<D> findAll() {
-		List<D> result = new ArrayList<D>();
-		for (T t : dao.getAll()) {
-			result.add(mapper.map(t, dtoClass));
-		}
-		return result;
-	}
+  public List<D> findAll() {
+    List<D> result = new ArrayList<D>();
+    for (T t : dao.getAll()) {
+      result.add(mapper.map(t, dtoClass));
+    }
+    return result;
+  }
 
-	@Transactional
-	public void save(D dto) {
-		dao.save(mapper.map(dto, entityClass));
-	}
+  @Transactional
+  public void save(D dto) {
+    try {
+      dao.save(mapper.map(dto, entityClass));
+    } catch (Exception e) {
+      throw new ServiceException.DataAccessException(ErrorCodes.SAVE_FAILED, e);
+    }
+  }
+
+  @Transactional
+  public void delete(ID id) {
+    try {
+      dao.remove(id);
+    } catch (Exception e) {
+      throw new ServiceException.DataAccessException(ErrorCodes.DELETION_FAILED, e);
+    }
+  }
 
 }

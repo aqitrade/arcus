@@ -23,60 +23,59 @@ import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan(basePackages = "com.aqitrade.arcus.data")
-//@EnableJpaRepositories("com.aqitrade.arcus.data")
+@ComponentScan(basePackages = "com.aqitrade.arcus")
+// @EnableJpaRepositories("com.aqitrade.arcus.data")
 public class JPAConfig {
-	private final static Logger LOG = LoggerFactory.getLogger(JPAConfig.class);
+  private final static Logger LOG = LoggerFactory.getLogger(JPAConfig.class);
 
-	private @Value("${db.driver}") String driver;
-	private @Value("${db.url}") String url;
-	private @Value("${db.username}") String username;
-	private @Value("${db.password}") String password;
+  private @Value("${db.driver}") String driver;
+  private @Value("${db.url}") String url;
+  private @Value("${db.username}") String username;
+  private @Value("${db.password}") String password;
 
-	@Bean(name = "dataSource", destroyMethod="close")
-	public DataSource dataSource() {
-		LOG.info("Initializing DB Connection Pooling for JDBC URL: {}", url);
-		HikariDataSource dataSource = new HikariDataSource();
-		dataSource.setDriverClassName(driver);
-		dataSource.setJdbcUrl(url);
-		dataSource.setUsername(username);
-		dataSource.setPassword(password);
-		dataSource.setMaximumPoolSize(2);
-		return dataSource;
-	}
+  @Bean(name = "dataSource", destroyMethod = "close")
+  public DataSource dataSource() {
+    LOG.info("Initializing DB Connection Pooling for JDBC URL: {}", url);
+    HikariDataSource dataSource = new HikariDataSource();
+    dataSource.setDriverClassName(driver);
+    dataSource.setJdbcUrl(url);
+    dataSource.setUsername(username);
+    dataSource.setPassword(password);
+    dataSource.setMaximumPoolSize(2);
+    return dataSource;
+  }
 
-	@Bean(name = "entityManagerFactory")
-	public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() {
-		LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
-		factoryBean.setDataSource(dataSource());
-		factoryBean
-				.setPersistenceXmlLocation("classpath:META-INF/jpa-persistence.xml");
-		factoryBean.setPersistenceUnitName("mysql");
-		factoryBean.setPackagesToScan("com.aqitrade.arcus.data");
-		factoryBean.setPackagesToScan(UserEntity.class.getPackage().getName());
-		
-		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-		vendorAdapter.setShowSql(true);
-		factoryBean.setJpaVendorAdapter(vendorAdapter);
-		return factoryBean;
-	}
+  @Bean(name = "entityManagerFactory")
+  public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() {
+    LocalContainerEntityManagerFactoryBean factoryBean =
+        new LocalContainerEntityManagerFactoryBean();
+    factoryBean.setDataSource(dataSource());
+    factoryBean.setPersistenceXmlLocation("classpath:META-INF/jpa-persistence.xml");
+    factoryBean.setPersistenceUnitName("mysql");
+    factoryBean.setPackagesToScan("com.aqitrade.arcus.data");
+    factoryBean.setPackagesToScan(UserEntity.class.getPackage().getName());
 
-	@Bean(name = "transactionManager")
-	public PlatformTransactionManager transactionManager() {
-		JpaTransactionManager transactionManager = new JpaTransactionManager();
-		transactionManager.setEntityManagerFactory(entityManagerFactoryBean()
-				.getObject());
-		return transactionManager;
-	}
+    HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+    vendorAdapter.setShowSql(true);
+    factoryBean.setJpaVendorAdapter(vendorAdapter);
+    return factoryBean;
+  }
 
-	@Bean
-	public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
-		return new PersistenceExceptionTranslationPostProcessor();
-	}
+  @Bean(name = "transactionManager")
+  public PlatformTransactionManager transactionManager() {
+    JpaTransactionManager transactionManager = new JpaTransactionManager();
+    transactionManager.setEntityManagerFactory(entityManagerFactoryBean().getObject());
+    return transactionManager;
+  }
 
-	@Bean
-	public DozerBeanMapper getMapper() {
-		return new DozerBeanMapper();
-	}
+  @Bean
+  public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
+    return new PersistenceExceptionTranslationPostProcessor();
+  }
+
+  @Bean
+  public DozerBeanMapper getMapper() {
+    return new DozerBeanMapper();
+  }
 
 }

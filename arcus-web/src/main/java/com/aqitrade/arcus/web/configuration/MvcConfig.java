@@ -22,69 +22,66 @@ import com.aqitrade.arcus.web.viewresolver.JsonViewResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "com.aqitrade.arcus.web")
-@Import(SwaggerConfig.class)
+@ComponentScan(basePackages = "com.aqitrade.arcus")
+@Import({SwaggerConfig.class, WebConfig.class})
 public class MvcConfig extends WebMvcConfigurerAdapter {
 
-	/*
-	 * Configure ContentNegotiationManager
-	 */
-	@Override
-	public void configureContentNegotiation(
-			ContentNegotiationConfigurer configurer) {
-		configurer.ignoreAcceptHeader(false).defaultContentType(
-				MediaType.APPLICATION_JSON);
-	}
+  /*
+   * Configure ContentNegotiationManager
+   */
+  @Override
+  public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+    configurer.ignoreAcceptHeader(false).defaultContentType(MediaType.APPLICATION_JSON);
+  }
 
-	/*
-	 * Configure ContentNegotiatingViewResolver
-	 */
-	@Bean
-	public ViewResolver contentNegotiatingViewResolver(
-			ContentNegotiationManager manager) {
-		ContentNegotiatingViewResolver resolver = new ContentNegotiatingViewResolver();
-		resolver.setContentNegotiationManager(manager);
+  /*
+   * Configure ContentNegotiatingViewResolver
+   */
+  @Bean
+  public ViewResolver contentNegotiatingViewResolver(ContentNegotiationManager manager) {
+    ContentNegotiatingViewResolver resolver = new ContentNegotiatingViewResolver();
+    resolver.setContentNegotiationManager(manager);
 
-		// Define all possible view resolvers
-		List<ViewResolver> resolvers = new ArrayList<ViewResolver>();
+    // Define all possible view resolvers
+    List<ViewResolver> resolvers = new ArrayList<ViewResolver>();
 
-		resolvers.add(jsonViewResolver());
-		resolvers.add(jspViewResolver());
+    resolvers.add(jsonViewResolver());
+    resolvers.add(jspViewResolver());
 
-		resolver.setViewResolvers(resolvers);
-		return resolver;
-	}
+    resolver.setViewResolvers(resolvers);
+    return resolver;
+  }
 
-	/*
-	 * Configure View resolver to provide JSON output using JACKSON library to
-	 * convert object in JSON format.
-	 */
-	@Bean
-	public ViewResolver jsonViewResolver() {
-		return new JsonViewResolver();
-	}
+  /*
+   * Configure View resolver to provide JSON output using JACKSON library to convert object in JSON
+   * format.
+   */
+  @Bean
+  public ViewResolver jsonViewResolver() {
+    return new JsonViewResolver();
+  }
 
-	/*
-	 * Configure View resolver to provide HTML output This is the default format
-	 * in absence of any type suffix.
-	 */
-	@Bean
-	public ViewResolver jspViewResolver() {
-		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-		viewResolver.setViewClass(JstlView.class);
-		viewResolver.setPrefix("/WEB-INF/views/");
-		viewResolver.setSuffix(".jsp");
-		return viewResolver;
-	}
+  /*
+   * Configure View resolver to provide HTML output This is the default format in absence of any
+   * type suffix.
+   */
+  @Bean
+  public ViewResolver jspViewResolver() {
+    InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+    viewResolver.setViewClass(JstlView.class);
+    viewResolver.setPrefix("/WEB-INF/views/");
+    viewResolver.setSuffix(".jsp");
+    return viewResolver;
+  }
 
-	@Bean(name = "messageSource")
-	public ReloadableResourceBundleMessageSource getMessageSource() {
-		ReloadableResourceBundleMessageSource resource = new ReloadableResourceBundleMessageSource();
-		resource.setBasename("classpath:messages/messages");
-		resource.setDefaultEncoding("UTF-8");
-		return resource;
-	}
-	
-	
+  @Bean(name = "messageSource")
+  public ReloadableResourceBundleMessageSource getMessageSource() {
+    ReloadableResourceBundleMessageSource resource = new ReloadableResourceBundleMessageSource();
+    resource.setBasename("classpath:messages/messages");
+    resource.setDefaultEncoding("UTF-8");
+    return resource;
+  }
+
+
 
 }
