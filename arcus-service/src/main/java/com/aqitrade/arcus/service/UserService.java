@@ -5,5 +5,7 @@ import com.aqitrade.arcus.data.entity.UserEntity;
 
 public interface UserService extends GenericService<UserEntity, UserDto, Long>{
 
+  boolean userExists(String userName);
+
 
 }

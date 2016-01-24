@@ -12,7 +12,9 @@ public enum ErrorCodes {
 
   // Arcus error codes
                       ENTITY_NOT_FOUND("001", "Entity not found"), DELETION_FAILED("002",
-                          "Delete operation failed"), SAVE_FAILED("002", "Save operation failed");
+                          "Delete operation failed"), SAVE_FAILED("002",
+                              "Save operation failed"), DB_OPERATION_FAILED("003",
+                                  "DB operation failed");
   ;
 
   private final String errorCode;

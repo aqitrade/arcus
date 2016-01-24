@@ -44,6 +44,20 @@ public class ServiceExceptionHandler extends ResponseEntityExceptionHandler {
         request);
   }
 
+  @ExceptionHandler({org.springframework.orm.jpa.JpaSystemException.class,
+      org.hibernate.HibernateException.class, org.springframework.dao.DataAccessException.class})
+  protected ResponseEntity<Object> handleDBException(Exception ex, WebRequest request) {
+    LOG.error(ex.getMessage(), ex);
+    ErrorMessage error = new ErrorMessage(ErrorCodes.DB_OPERATION_FAILED.code(),
+        ErrorCodes.DB_OPERATION_FAILED.message(), ExceptionUtils.getStackTrace(ex));
+    ServiceResponse<Void> body = new ServiceResponse<Void>(error);
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON);
+    return super.handleExceptionInternal(ex, body, headers, HttpStatus.INTERNAL_SERVER_ERROR,
+        request);
+  }
+  //
+
   @ExceptionHandler({Exception.class})
   @Override
   protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body,

@@ -7,7 +7,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
 
 import org.apache.commons.logging.Log;
@@ -115,6 +114,13 @@ public class GenericDaoImpl<T, PK extends Serializable> implements GenericDao<T,
    */
   public void remove(PK id) {
     this.entityManager.remove(this.get(id));
+  }
+
+  /**
+   * @return the persistentClass
+   */
+  public Class<T> getPersistentClass() {
+    return persistentClass;
   }
 
 }
