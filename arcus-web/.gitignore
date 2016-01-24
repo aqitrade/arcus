@@ -1,6 +1,8 @@
 *target*
 .classpath
+.project
 .settings/
 bin/**
+logs/**
 .project
 .DS_Store
