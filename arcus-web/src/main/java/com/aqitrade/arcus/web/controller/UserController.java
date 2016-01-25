@@ -71,5 +71,4 @@ public class UserController {
     userService.delete(userId);
     return new ServiceResponse<Void>();
   }
-
 }

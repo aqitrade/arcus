@@ -15,11 +15,26 @@ public class UserDaoImpl extends GenericDaoImpl<UserEntity, Long> implements Use
     super(UserEntity.class);
   }
 
-  public boolean userExists(String userName) {
+  public UserEntity getUserByUserName(String userName) {
     try {
       Object result =
           getEntityManager().createQuery("select x from UserEntity x where user_name =?1")
               .setParameter(1, userName).getSingleResult();
+      return (UserEntity) result;
+    } catch (javax.persistence.NoResultException e) {
+      return null;
+    }
+  }
+
+  public boolean userExists(String userName) {
+    return getUserByUserName(userName) != null;
+  }
+
+  public boolean authenticateUser(String userName, String password) {
+    try {
+      Object result = getEntityManager()
+          .createQuery("select x from UserEntity x where user_name =?1 and password=?2")
+          .setParameter(1, userName).setParameter(2, password).getSingleResult();
       return result != null;
     } catch (javax.persistence.NoResultException e) {
       LOG.error(e.getMessage(), e);

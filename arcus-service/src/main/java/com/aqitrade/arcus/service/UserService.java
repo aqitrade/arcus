@@ -7,5 +7,7 @@ public interface UserService extends GenericService<UserEntity, UserDto, Long>{
 
   boolean userExists(String userName);
 
-
+  boolean authenticateUser(String userName, String password);
+  
+  UserEntity getUserByUserName(String userName);
 }
