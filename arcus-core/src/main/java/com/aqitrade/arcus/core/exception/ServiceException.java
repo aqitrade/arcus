@@ -91,4 +91,21 @@ public abstract class ServiceException extends RuntimeException {
       super(ErrorCodes.NOTIFICATION_FAILED, message, cause);
     }
   }
+  
+  public static class BadRequest extends ServiceException {
+
+    private static final long serialVersionUID = 1L;
+
+    public BadRequest(String message) {
+      super(ErrorCodes.NOTIFICATION_FAILED, message);
+    }
+
+    public BadRequest(String message, Throwable cause) {
+      super(ErrorCodes.NOTIFICATION_FAILED, message, cause);
+    }
+    
+    public BadRequest(ErrorCodes errorCode) {
+      super(errorCode);
+    }
+  }
 }

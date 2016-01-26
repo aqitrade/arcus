@@ -8,7 +8,7 @@ public enum ErrorCodes {
           "405", "Not Supported"), HTTP_NO_HANDLER_METHOD("404",
               "The requested resource not available"), MEDIA_TYPE_NOT_ACCEPTABLE_HTTP_ERROR("406",
                   "Media type not acceptable"), MEDIA_TYPE_NOT_SUPPORTED_HTTP_ERROR("415",
-                      "Media type not supported"),
+                      "Media type not supported"),BAD_REQUEST("400", "Invalid/Bad request"),
 
   // Arcus error codes
                       ENTITY_NOT_FOUND("001", "Entity not found"), DELETION_FAILED("002",

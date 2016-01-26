@@ -102,17 +102,17 @@ public class ForgotUserNamePasswordServiceImpl implements ForgotUserNamePassword
 
   private void validateSecurityCodeAndExpiryDate(int securityCode, UserEntity userEntity) {
     if (userEntity.getSecurityCode() == null || userEntity.getSecurityExpDate() == null) {
-      throw new ServiceException.EntityNotFoundException(ErrorCodes.SECURITY_CODE_EXPIRED);
+      throw new ServiceException.BadRequest(ErrorCodes.SECURITY_CODE_EXPIRED);
     }
 
     if (userEntity.getSecurityCode() != securityCode) {
-      throw new ServiceException.EntityNotFoundException(ErrorCodes.SECURITY_CODE_DOES_NOT_MATCH);
+      throw new ServiceException.BadRequest(ErrorCodes.BAD_REQUEST);
     }
 
     if (userEntity.getSecurityExpDate() != null) {
       DateTime dateTime = new DateTime(userEntity.getSecurityExpDate());
       if (!dateTime.isAfterNow()) {
-        throw new ServiceException.EntityNotFoundException(ErrorCodes.SECURITY_CODE_EXPIRED);
+        throw new ServiceException.BadRequest(ErrorCodes.BAD_REQUEST);
       }
     }
   }
