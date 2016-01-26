@@ -42,7 +42,7 @@ public class UserEntity {
   private String emailId;
 
   @Column(name = "security_code", nullable = true)
-  private String securityCode;
+  private Long securityCode;
 
   @Column(name = "security_exp_date", nullable = true)
   private Date securityExpDate;
@@ -136,14 +136,14 @@ public class UserEntity {
   /**
    * @return the securityCode
    */
-  public String getSecurityCode() {
+  public Long getSecurityCode() {
     return securityCode;
   }
 
   /**
    * @param securityCode the securityCode to set
    */
-  public void setSecurityCode(String securityCode) {
+  public void setSecurityCode(Long securityCode) {
     this.securityCode = securityCode;
   }
 

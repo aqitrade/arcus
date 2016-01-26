@@ -14,8 +14,12 @@ public enum ErrorCodes {
                       ENTITY_NOT_FOUND("001", "Entity not found"), DELETION_FAILED("002",
                           "Delete operation failed"), SAVE_FAILED("002",
                               "Save operation failed"), DB_OPERATION_FAILED("003",
-                                  "DB operation failed");
-  ;
+                                  "DB operation failed"), NOTIFICATION_FAILED("004",
+                                      "Failed to send notification"), USER_DOES_NOT_EXISTS("005",
+                                          "User does not exists"), SECURITY_CODE_DOES_NOT_MATCH(
+                                              "006",
+                                              "Invalid security code"), SECURITY_CODE_EXPIRED("007",
+                                                  "Security code expired");
 
   private final String errorCode;
   private final String errorMessage;

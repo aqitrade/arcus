@@ -11,14 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.aqitrade.arcus.service.UserService;
+import com.aqitrade.arcus.web.util.WebConstants;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @Api(value = "/login", description = "Login APIs")
-@Controller
+@RestController
 public class LoginController {
 
   @Autowired
@@ -27,12 +29,13 @@ public class LoginController {
   @ApiOperation(value = "Login", httpMethod = "POST")
   @RequestMapping(value = "/login", method = RequestMethod.POST,
       consumes = "application/x-www-form-urlencoded")
-  public @ResponseBody ResponseEntity<Void> login(HttpServletRequest request,
+  public ResponseEntity<Void> login(HttpServletRequest request,
       @RequestParam String userName, @RequestParam String password) {
     HttpSession session = request.getSession(true);
     if (session.isNew()) {
       if (userService.authenticateUser(userName, password)) {
-        session.setAttribute("User", userService.getUserByUserName(userName));
+        session.setAttribute(WebConstants.SessionAttributes.USER.name(),
+            userService.getUserByUserName(userName));
         return new ResponseEntity<Void>(HttpStatus.OK);
       } else {
         return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
@@ -43,9 +46,11 @@ public class LoginController {
 
   @ApiOperation(value = "Logout", httpMethod = "GET")
   @RequestMapping(value = "/logout", method = RequestMethod.GET)
-  public @ResponseBody ResponseEntity<Void> logout(HttpServletRequest request) {
+  public ResponseEntity<Void> logout(HttpServletRequest request) {
     HttpSession session = request.getSession(false);
-    session.invalidate();
+    if (session != null) {
+      session.invalidate();
+    }
     return new ResponseEntity<Void>(HttpStatus.OK);
   }
 

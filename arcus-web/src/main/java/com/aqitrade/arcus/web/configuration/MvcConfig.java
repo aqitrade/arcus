@@ -3,6 +3,7 @@ package com.aqitrade.arcus.web.configuration;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -13,11 +14,13 @@ import org.springframework.web.accept.ContentNegotiationManager;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
+import com.aqitrade.arcus.web.handler.AuthentictionHandlerInterceptor;
 import com.aqitrade.arcus.web.viewresolver.JsonViewResolver;
 
 @Configuration
@@ -25,6 +28,9 @@ import com.aqitrade.arcus.web.viewresolver.JsonViewResolver;
 @ComponentScan(basePackages = "com.aqitrade.arcus")
 @Import({SwaggerConfig.class, WebConfig.class})
 public class MvcConfig extends WebMvcConfigurerAdapter {
+
+  @Autowired
+  private AuthentictionHandlerInterceptor authentictionHandlerInterceptor;
 
   /*
    * Configure ContentNegotiationManager
@@ -82,6 +88,11 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
     return resource;
   }
 
-
+  @Override
+  public void addInterceptors(InterceptorRegistry registry) {
+//    registry.addInterceptor(authentictionHandlerInterceptor).addPathPatterns("/**")
+//        .excludePathPatterns("/login/**").excludePathPatterns("/logout/**").excludePathPatterns("**/*.css")
+//        .excludePathPatterns("**/*.html").excludePathPatterns("**/*.png");
+  }
 
 }

@@ -26,6 +26,17 @@ public class UserDaoImpl extends GenericDaoImpl<UserEntity, Long> implements Use
     }
   }
 
+  public UserEntity getUserByPhoneNumber(Long phoneNumber) {
+    try {
+      Object result =
+          getEntityManager().createQuery("select x from UserEntity x where phone_number =?1")
+              .setParameter(1, phoneNumber).getSingleResult();
+      return (UserEntity) result;
+    } catch (javax.persistence.NoResultException e) {
+      return null;
+    }
+  }
+
   public boolean userExists(String userName) {
     return getUserByUserName(userName) != null;
   }

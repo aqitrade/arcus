@@ -5,12 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.aqitrade.arcus.data.dto.UserDto;
 import com.aqitrade.arcus.service.UserService;
@@ -20,7 +19,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @Api(value = "/user", description = "User APIs")
-@Controller
+@RestController
 public class UserController {
 
   @Autowired
@@ -28,13 +27,13 @@ public class UserController {
 
   @ApiOperation(value = "List all registered users", httpMethod = "GET")
   @RequestMapping(value = "/users", method = RequestMethod.GET)
-  public @ResponseBody ServiceResponse<List<UserDto>> getUsers() {
+  public ServiceResponse<List<UserDto>> getUsers() {
     return new ServiceResponse<List<UserDto>>(userService.findAll());
   }
 
   @ApiOperation(value = "View user by id", httpMethod = "GET")
   @RequestMapping(value = "/users/{userId}", method = RequestMethod.GET)
-  public @ResponseBody ServiceResponse<UserDto> getUser(@PathVariable long userId) {
+  public ServiceResponse<UserDto> getUser(@PathVariable long userId) {
     return new ServiceResponse<UserDto>(userService.findOne(userId));
   }
 
@@ -50,7 +49,7 @@ public class UserController {
 
   @ApiOperation(value = "Create new user", httpMethod = "POST")
   @RequestMapping(value = "/users", method = RequestMethod.POST, consumes = "application/json")
-  public @ResponseBody ServiceResponse<Void> createeUser(@RequestBody UserDto userDto) {
+  public ServiceResponse<Void> createeUser(@RequestBody UserDto userDto) {
     userService.create(userDto);
     return new ServiceResponse<Void>();
   }
@@ -58,8 +57,7 @@ public class UserController {
   @ApiOperation(value = "Update existing user", httpMethod = "PUT")
   @RequestMapping(value = "/users/{userId}", method = RequestMethod.PUT,
       consumes = "application/json")
-  public @ResponseBody ServiceResponse<Void> updateUser(@RequestBody UserDto userDto,
-      @PathVariable long userId) {
+  public ServiceResponse<Void> updateUser(@RequestBody UserDto userDto, @PathVariable long userId) {
     userDto.setUserId(userId);
     userService.update(userId, userDto);
     return new ServiceResponse<Void>();
@@ -67,7 +65,7 @@ public class UserController {
 
   @ApiOperation(value = "Delete user by id", httpMethod = "DELETE")
   @RequestMapping(value = "/users/{userId}", method = RequestMethod.DELETE)
-  public @ResponseBody ServiceResponse<Void> deleteUser(@PathVariable long userId) {
+  public ServiceResponse<Void> deleteUser(@PathVariable long userId) {
     userService.delete(userId);
     return new ServiceResponse<Void>();
   }

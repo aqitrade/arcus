@@ -12,11 +12,8 @@ import com.aqitrade.arcus.service.CountryService;
 public class CountryServiceImpl extends GenericServiceImpl<CountryEntity, CountryDto, Long>
     implements CountryService {
 
-  private CountryDao countryDao;
-
   @Autowired
   public CountryServiceImpl(CountryDao countryDao) {
     super(countryDao);
-    this.countryDao = countryDao;
   }
 }

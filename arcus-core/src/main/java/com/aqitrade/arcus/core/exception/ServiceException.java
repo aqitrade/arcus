@@ -55,6 +55,11 @@ public abstract class ServiceException extends RuntimeException {
     public EntityNotFoundException(String message) {
       super(ErrorCodes.ENTITY_NOT_FOUND, message);
     }
+
+    public EntityNotFoundException(ErrorCodes errorCode) {
+      super(errorCode);
+    }
+
   }
 
   public static class DataAccessException extends ServiceException {
@@ -72,6 +77,18 @@ public abstract class ServiceException extends RuntimeException {
     public DataAccessException(ErrorCodes errorCode, Throwable cause) {
       super(ErrorCodes.ENTITY_NOT_FOUND, cause);
     }
+  }
 
+  public static class NotificationException extends ServiceException {
+
+    private static final long serialVersionUID = 1L;
+
+    public NotificationException(String message) {
+      super(ErrorCodes.NOTIFICATION_FAILED, message);
+    }
+
+    public NotificationException(String message, Throwable cause) {
+      super(ErrorCodes.NOTIFICATION_FAILED, message, cause);
+    }
   }
 }

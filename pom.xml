@@ -233,6 +233,12 @@
 			<artifactId>bootstrap</artifactId>
 			<version>3.1.0</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com.plivo</groupId>
+			<artifactId>plivo-java</artifactId>
+			<version>3.0.8</version>
+		</dependency>
 	</dependencies>
 
 
@@ -259,6 +265,10 @@
 			<id>repository.springsource.release</id>
 			<name>SpringSource GA Repository</name>
 			<url>http://repo.springsource.org/release</url>
+		</repository>
+		<repository>
+			<id>mvnrepository</id>
+			<url>http://mvnrepository.com/artifact/</url>
 		</repository>
 	</repositories>
 </project>

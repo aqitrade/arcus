@@ -11,7 +11,7 @@ public class UserDto {
   private String password;
   private Long phoneNumber;
   private String emailId;
-  private String securityCode;
+  private Long securityCode;
   private Date securityExpDate;
 
   /**
@@ -101,14 +101,14 @@ public class UserDto {
   /**
    * @return the securityCode
    */
-  public String getSecurityCode() {
+  public Long getSecurityCode() {
     return securityCode;
   }
 
   /**
    * @param securityCode the securityCode to set
    */
-  public void setSecurityCode(String securityCode) {
+  public void setSecurityCode(Long securityCode) {
     this.securityCode = securityCode;
   }
 
