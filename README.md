@@ -21,7 +21,7 @@ The following softwares are required to run Arcus in local:
 7. Arcus should be up and running in port 8080 and you can access 
 	arcus REST service catalog using this [ link ](http://localhost:8080/arcus/swagger-ui.html) 
 
-### JPA entities code generation
+#### JPA entities code generation
 1. Update eclipse from site http://www.telosys.org/eclipse/v210 or From Eclipse market place, install Telosys Tools 2.1.1
 2. Double click MYSQL.dbrep file from arcus-data/TelosysTools folder
 3. Select table name from the drop down
