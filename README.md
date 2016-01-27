@@ -20,3 +20,12 @@ The following softwares are required to run Arcus in local:
 6. Run Jetty server (`mvn jetty:run`)
 7. Arcus should be up and running in port 8080 and you can access 
 	arcus REST service catalog using this [ link ](http://localhost:8080/arcus/swagger-ui.html) 
+
+### JPA entities code generation
+1. Update eclipse from site http://www.telosys.org/eclipse/v210 or From Eclipse market place, install Telosys Tools 2.1.1
+2. Double click MYSQL.dbrep file from arcus-data/TelosysTools folder
+3. Select table name from the drop down
+4. Select the Generation tab and choose persistence-jpa from the drop down
+5. Check JPA Entities and click generate button.
+6. Entity class should be generated into com.aqitrade.arcus.data.entity package. 
+
