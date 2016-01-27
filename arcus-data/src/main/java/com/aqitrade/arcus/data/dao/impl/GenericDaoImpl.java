@@ -8,25 +8,23 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaQuery;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.aqitrade.arcus.core.exception.ServiceException;
+import com.aqitrade.arcus.core.util.CoreConstants;
 import com.aqitrade.arcus.data.dao.GenericDao;
 
 public class GenericDaoImpl<T, PK extends Serializable> implements GenericDao<T, PK> {
-  /**
-   * Log variable for all child classes. Uses LogFactory.getLog(getClass()) from Commons Logging
-   */
-  protected final Log log = LogFactory.getLog(getClass());
 
-  public static final String PERSISTENCE_UNIT_NAME = "mysql";
+  private final Logger log = LoggerFactory.getLogger(getClass());
 
   /**
    * Entity manager, injected by Spring using @PersistenceContext annotation on setEntityManager()
    */
-  @PersistenceContext(unitName = PERSISTENCE_UNIT_NAME)
+  @PersistenceContext(unitName = CoreConstants.PERSISTENCE_UNIT_NAME)
   private EntityManager entityManager;
   private Class<T> persistentClass;
 
@@ -41,19 +39,33 @@ public class GenericDaoImpl<T, PK extends Serializable> implements GenericDao<T,
   }
 
   /**
-   * Constructor that takes in a class to see which type of entity to persist. Use this constructor
-   * when subclassing or using dependency injection.
+   * Returns JPA {@link EntityManager}
    * 
-   * @param persistentClass the class type you'd like to persist
-   * @param entityManager the configured EntityManager for JPA implementation.
+   * @return {@link EntityManager}
    */
-  public GenericDaoImpl(final Class<T> persistentClass, EntityManager entityManager) {
-    this.persistentClass = persistentClass;
-    this.entityManager = entityManager;
-  }
-
   public EntityManager getEntityManager() {
     return this.entityManager;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public List<T> getListByCriteriaQuery(CriteriaQuery<T> query) {
+    return this.entityManager.createQuery(query).getResultList();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public List<T> getListByQuery(String query) {
+    return this.entityManager.createQuery(query, getPersistentClass()).getResultList();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public List<T> getListByNamedQuery(String queryName) {
+    return this.entityManager.createNamedQuery(queryName, getPersistentClass()).getResultList();
   }
 
   /**

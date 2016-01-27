@@ -3,6 +3,8 @@ package com.aqitrade.arcus.data.dao;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaQuery;
+
 public interface GenericDao<T, PK extends Serializable> {
 
   /**
@@ -63,5 +65,29 @@ public interface GenericDao<T, PK extends Serializable> {
    * @param id the identifier (primary key) of the object to remove
    */
   void remove(PK id);
+
+  /**
+   * Returns list of Entities for the given {@link CriteriaQuery}
+   * 
+   * @param query {@link CriteriaQuery}
+   * @return List List of entities
+   */
+  List<T> getListByCriteriaQuery(CriteriaQuery<T> query);
+
+  /**
+   * Returns list of entities for the given JPA query
+   * 
+   * @param query Query
+   * @return List list of entities
+   */
+  List<T> getListByQuery(String query);
+
+  /**
+   * Returns list of entities for the given JPA named query
+   * 
+   * @param queryName named query name
+   * @return List list of entities
+   */
+  List<T> getListByNamedQuery(String queryName);
 
 }

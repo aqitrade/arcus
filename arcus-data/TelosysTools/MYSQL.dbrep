@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Telosys Database Repository --><root>
+<tableList databaseId="0" databaseName="MYSQL" databaseProductName="MySQL" generation="2016-01-26 21:39:34">
+<table catalog="arcus" databaseType="TABLE" javaBean="Country" name="country" schema="">
+<column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="country_id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="countryId" javaType="java.lang.Long" jdbcTypeCode="-5" label="Country id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="country_name" dbNotNull="true" dbPosition="2" dbSize="45" dbTypeName="VARCHAR" inputType="text" javaName="countryName" javaType="java.lang.String" jdbcTypeCode="12" label="Country name" maxLength="45" notEmpty="true" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="country_display_name" dbNotNull="true" dbPosition="3" dbSize="45" dbTypeName="VARCHAR" inputType="text" javaName="countryDisplayName" javaType="java.lang.String" jdbcTypeCode="12" label="Country display name" maxLength="45" notEmpty="true" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="iso_2a_country_code" dbNotNull="true" dbPosition="4" dbSize="128" dbTypeName="VARCHAR" inputType="text" javaName="iso2aCountryCode" javaType="java.lang.String" jdbcTypeCode="12" label="Iso 2a country code" maxLength="128" notEmpty="true" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="iso_3a_country_code" dbNotNull="false" dbPosition="5" dbSize="128" dbTypeName="VARCHAR" inputType="text" javaName="iso3aCountryCode" javaType="java.lang.String" jdbcTypeCode="12" label="Iso 3a country code" maxLength="128" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="numcode" dbNotNull="false" dbPosition="6" dbSize="5" dbTypeName="SMALLINT" inputType="number" javaName="numcode" javaType="java.lang.Short" jdbcTypeCode="5" label="Numcode" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="phonecode" dbNotNull="true" dbPosition="7" dbSize="10" dbTypeName="INT" inputType="number" javaName="phonecode" javaType="java.lang.Integer" jdbcTypeCode="4" label="Phonecode" notNull="true" selected="true"/>
+<column dateType="DT" dbComment="" dbDefaultValue="CURRENT_TIMESTAMP" dbName="create_date" dbNotNull="true" dbPosition="8" dbSize="19" dbTypeName="TIMESTAMP" inputType="" javaName="createDate" javaType="java.util.Date" jdbcTypeCode="93" label="Create date" notNull="true" selected="true"/>
+</table>
+<table catalog="arcus" databaseType="TABLE" javaBean="KvStorage" name="kv_storage" schema="">
+<column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="kv_storage_id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="kvStorageId" javaType="java.lang.Long" jdbcTypeCode="-5" label="Kv storage id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="key" dbNotNull="true" dbPosition="2" dbSize="255" dbTypeName="VARCHAR" inputType="text" javaName="key" javaType="java.lang.String" jdbcTypeCode="12" label="Key" maxLength="255" notEmpty="true" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="value" dbNotNull="true" dbPosition="3" dbSize="65535" dbTypeName="BLOB" inputType="" javaName="value" javaType="byte[]" jdbcTypeCode="-4" label="Value" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="metadata" dbNotNull="false" dbPosition="4" dbSize="65535" dbTypeName="TEXT" inputType="text" javaName="metadata" javaType="java.lang.String" jdbcTypeCode="-1" label="Metadata" longText="true" maxLength="65535" notNull="false" selected="true"/>
+</table>
+<table catalog="arcus" databaseType="TABLE" javaBean="User" name="user" schema="">
+<column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="user_id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="userId" javaType="java.lang.Long" jdbcTypeCode="-5" label="User id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="user_name" dbNotNull="true" dbPosition="2" dbSize="45" dbTypeName="VARCHAR" inputType="text" javaName="userName" javaType="java.lang.String" jdbcTypeCode="12" label="User name" maxLength="45" notEmpty="true" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="password" dbNotNull="true" dbPosition="3" dbSize="128" dbTypeName="VARCHAR" inputType="text" javaName="password" javaType="java.lang.String" jdbcTypeCode="12" label="Password" maxLength="128" notEmpty="true" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="first_name" dbNotNull="true" dbPosition="4" dbSize="45" dbTypeName="VARCHAR" inputType="text" javaName="firstName" javaType="java.lang.String" jdbcTypeCode="12" label="First name" maxLength="45" notEmpty="true" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="last_name" dbNotNull="true" dbPosition="5" dbSize="45" dbTypeName="VARCHAR" inputType="text" javaName="lastName" javaType="java.lang.String" jdbcTypeCode="12" label="Last name" maxLength="45" notEmpty="true" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="CHINA" dbName="country_name" dbNotNull="true" dbPosition="6" dbSize="45" dbTypeName="VARCHAR" inputType="text" javaName="countryName" javaType="java.lang.String" jdbcTypeCode="12" label="Country name" maxLength="45" notEmpty="true" notNull="true" selected="true"/>
+<column dateType="DT" dbComment="" dbDefaultValue="CURRENT_TIMESTAMP" dbName="create_date" dbNotNull="true" dbPosition="7" dbSize="19" dbTypeName="TIMESTAMP" inputType="" javaName="createDate" javaType="java.util.Date" jdbcTypeCode="93" label="Create date" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="phone_number" dbNotNull="true" dbPosition="8" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="phoneNumber" javaType="java.lang.Long" jdbcTypeCode="-5" label="Phone number" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="email_id" dbNotNull="false" dbPosition="9" dbSize="45" dbTypeName="VARCHAR" inputType="text" javaName="emailId" javaType="java.lang.String" jdbcTypeCode="12" label="Email id" maxLength="45" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="security_code" dbNotNull="false" dbPosition="10" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="securityCode" javaType="java.lang.Long" jdbcTypeCode="-5" label="Security code" notNull="false" selected="true"/>
+<column dateType="DT" dbComment="" dbDefaultValue="" dbName="security_exp_date" dbNotNull="false" dbPosition="11" dbSize="19" dbTypeName="TIMESTAMP" inputType="" javaName="securityExpDate" javaType="java.util.Date" jdbcTypeCode="93" label="Security exp date" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="0" dbName="active_ind" dbNotNull="false" dbPosition="12" dbSize="0" dbTypeName="BIT" inputType="checkbox" javaName="activeInd" javaType="java.lang.Boolean" jdbcTypeCode="-7" label="Active ind" notNull="false" selected="true"/>
+<column dateType="DT" dbComment="" dbDefaultValue="CURRENT_TIMESTAMP" dbName="modify_date" dbNotNull="false" dbPosition="13" dbSize="19" dbTypeName="TIMESTAMP" inputType="" javaName="modifyDate" javaType="java.util.Date" jdbcTypeCode="93" label="Modify date" notNull="false" selected="true"/>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="user_preference_ibfk_1" id="LINK_FK_user_preference_ibfk_1_I" inverseSideOf="LINK_FK_user_preference_ibfk_1_O" javaName="listOfUserPreference" javaType="java.util.List" joinTableName="" mappedBy="user" optional="UNDEFINED" owningSide="false" sourceTableName="user" targetEntity="UserPreference" targetTableName="user_preference" used="true"/>
+</table>
+<table catalog="arcus" databaseType="TABLE" javaBean="UserPreference" name="user_preference" schema="">
+<column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbForeignKey="true" dbName="user_id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="userId" javaType="java.lang.Long" jdbcTypeCode="-5" label="User id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="key" dbNotNull="true" dbPosition="2" dbPrimaryKey="true" dbSize="255" dbTypeName="VARCHAR" inputType="text" javaName="key" javaType="java.lang.String" jdbcTypeCode="12" label="Key" maxLength="255" notEmpty="true" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="value" dbNotNull="true" dbPosition="3" dbSize="65535" dbTypeName="BLOB" inputType="" javaName="value" javaType="byte[]" jdbcTypeCode="-4" label="Value" notNull="true" selected="true"/>
+<fk name="user_preference_ibfk_1">
+<fkcol colname="user_id" colref="user_id" deferrable="7" deleterule="3" sequence="1" tablename="user_preference" tableref="user" updaterule="3"/>
+</fk>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="user_preference_ibfk_1" id="LINK_FK_user_preference_ibfk_1_O" inverseSideOf="" javaName="user" javaType="User" joinTableName="" mappedBy="" optional="UNDEFINED" owningSide="true" sourceTableName="user_preference" targetEntity="User" targetTableName="user" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="user_id" nullable="true" referencedColumnName="user_id" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+</table>
+</tableList>
+</root>

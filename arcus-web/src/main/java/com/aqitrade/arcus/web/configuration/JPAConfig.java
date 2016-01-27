@@ -10,21 +10,18 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import com.aqitrade.arcus.data.entity.UserEntity;
-import com.aqitrade.arcus.data.repository.UserRepository;
+import com.aqitrade.arcus.core.util.CoreConstants;
 import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 @EnableTransactionManagement
 @ComponentScan(basePackages = "com.aqitrade.arcus")
-// @EnableJpaRepositories("com.aqitrade.arcus.data")
 public class JPAConfig {
   private final static Logger LOG = LoggerFactory.getLogger(JPAConfig.class);
 
@@ -51,12 +48,9 @@ public class JPAConfig {
         new LocalContainerEntityManagerFactoryBean();
     factoryBean.setDataSource(dataSource());
     factoryBean.setPersistenceXmlLocation("classpath:META-INF/jpa-persistence.xml");
-    factoryBean.setPersistenceUnitName("mysql");
-    factoryBean.setPackagesToScan("com.aqitrade.arcus.data");
-    factoryBean.setPackagesToScan(UserEntity.class.getPackage().getName());
+    factoryBean.setPersistenceUnitName(CoreConstants.PERSISTENCE_UNIT_NAME);
 
     HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-    vendorAdapter.setShowSql(true);
     factoryBean.setJpaVendorAdapter(vendorAdapter);
     return factoryBean;
   }
