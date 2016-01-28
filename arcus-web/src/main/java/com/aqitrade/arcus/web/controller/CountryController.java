@@ -15,6 +15,12 @@ import com.aqitrade.arcus.web.model.ServiceResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
+/**
+ * Exposes REST endpoints for country.
+ * 
+ * @author pani
+ *
+ */
 @Api(value = "/country", description = "Country APIs")
 @RestController
 public class CountryController {

@@ -16,7 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
     SwaggerConfig.class})
 public class AppConfig {
 
-  static @Bean public PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+  public static @Bean PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
     PropertySourcesPlaceholderConfigurer p = new PropertySourcesPlaceholderConfigurer();
     Resource[] resourceLocations = new Resource[] {new ClassPathResource("arcus.properties")};
     p.setLocations(resourceLocations);

@@ -18,6 +18,12 @@ import com.aqitrade.arcus.web.model.ServiceResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
+/**
+ * Exposes endpoints for user entity.
+ * 
+ * @author pani
+ *
+ */
 @Api(value = "/user", description = "User APIs")
 @RestController
 public class UserController {

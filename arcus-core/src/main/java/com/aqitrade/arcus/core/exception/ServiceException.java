@@ -2,6 +2,15 @@ package com.aqitrade.arcus.core.exception;
 
 import com.aqitrade.arcus.core.ErrorCodes;
 
+/**
+ * Arcus framework exception base class.
+ * 
+ * We recommend to use inner classes of {@link ServiceException} instead of creating Custom
+ * exception.
+ * 
+ * @author pani
+ *
+ */
 public abstract class ServiceException extends RuntimeException {
   private static final long serialVersionUID = 1L;
   private String code;
@@ -91,7 +100,7 @@ public abstract class ServiceException extends RuntimeException {
       super(ErrorCodes.NOTIFICATION_FAILED, message, cause);
     }
   }
-  
+
   public static class BadRequest extends ServiceException {
 
     private static final long serialVersionUID = 1L;
@@ -103,7 +112,7 @@ public abstract class ServiceException extends RuntimeException {
     public BadRequest(String message, Throwable cause) {
       super(ErrorCodes.NOTIFICATION_FAILED, message, cause);
     }
-    
+
     public BadRequest(ErrorCodes errorCode) {
       super(errorCode);
     }

@@ -2,6 +2,12 @@ package com.aqitrade.arcus.data.dto;
 
 import java.util.Date;
 
+/**
+ * Client contact for country entity.
+ * 
+ * @author pani
+ *
+ */
 public class CountryDto {
   private Long countryId;
   private String countryName;
@@ -122,6 +128,93 @@ public class CountryDto {
    */
   public void setCreateDate(Date createDate) {
     this.createDate = createDate;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.lang.Object#toString()
+   */
+  @Override
+  public String toString() {
+    return "CountryDto [countryId=" + countryId + ", countryName=" + countryName
+        + ", countryDisplayName=" + countryDisplayName + ", iso2aCountryCode=" + iso2aCountryCode
+        + ", iso3aCountryCode=" + iso3aCountryCode + ", numCode=" + numCode + ", phoneCode="
+        + phoneCode + ", createDate=" + createDate + "]";
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.lang.Object#hashCode()
+   */
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((countryDisplayName == null) ? 0 : countryDisplayName.hashCode());
+    result = prime * result + ((countryId == null) ? 0 : countryId.hashCode());
+    result = prime * result + ((countryName == null) ? 0 : countryName.hashCode());
+    result = prime * result + ((createDate == null) ? 0 : createDate.hashCode());
+    result = prime * result + ((iso2aCountryCode == null) ? 0 : iso2aCountryCode.hashCode());
+    result = prime * result + ((iso3aCountryCode == null) ? 0 : iso3aCountryCode.hashCode());
+    result = prime * result + numCode;
+    result = prime * result + ((phoneCode == null) ? 0 : phoneCode.hashCode());
+    return result;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    CountryDto other = (CountryDto) obj;
+    if (countryDisplayName == null) {
+      if (other.countryDisplayName != null)
+        return false;
+    } else if (!countryDisplayName.equals(other.countryDisplayName))
+      return false;
+    if (countryId == null) {
+      if (other.countryId != null)
+        return false;
+    } else if (!countryId.equals(other.countryId))
+      return false;
+    if (countryName == null) {
+      if (other.countryName != null)
+        return false;
+    } else if (!countryName.equals(other.countryName))
+      return false;
+    if (createDate == null) {
+      if (other.createDate != null)
+        return false;
+    } else if (!createDate.equals(other.createDate))
+      return false;
+    if (iso2aCountryCode == null) {
+      if (other.iso2aCountryCode != null)
+        return false;
+    } else if (!iso2aCountryCode.equals(other.iso2aCountryCode))
+      return false;
+    if (iso3aCountryCode == null) {
+      if (other.iso3aCountryCode != null)
+        return false;
+    } else if (!iso3aCountryCode.equals(other.iso3aCountryCode))
+      return false;
+    if (numCode != other.numCode)
+      return false;
+    if (phoneCode == null) {
+      if (other.phoneCode != null)
+        return false;
+    } else if (!phoneCode.equals(other.phoneCode))
+      return false;
+    return true;
   }
 
 }

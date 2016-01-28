@@ -13,13 +13,13 @@ import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.DispatcherServlet;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 import net.bull.javamelody.MonitoringFilter;
 import net.bull.javamelody.SessionListener;
 
 public class AppInitializer implements WebApplicationInitializer {
 
+  private static final String JAVA_MELODY_FILTER = "javaMelody";
   private static final String CHARACTER_ENCODING_FILTER_ENCODING = "UTF-8";
   private static final String CHARACTER_ENCODING_FILTER_NAME = "characterEncoding";
   private static final String CHARACTER_ENCODING_FILTER_URL_PATTERN = "/*";
@@ -41,8 +41,8 @@ public class AppInitializer implements WebApplicationInitializer {
         EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD);
     configureCharacterEncodingFilter(container, dispatcherTypes);
     // Add Filters
-    container.addFilter("javaMelody", MonitoringFilter.class).addMappingForUrlPatterns(null, false,
-        "/*");
+    container.addFilter(JAVA_MELODY_FILTER, MonitoringFilter.class).addMappingForUrlPatterns(null,
+        false, "/*");
 
     // Create the dispatcher servlet's Spring application context
     AnnotationConfigWebApplicationContext dispatcherServlet =
@@ -66,10 +66,4 @@ public class AppInitializer implements WebApplicationInitializer {
     characterEncoding.addMappingForUrlPatterns(dispatcherTypes, true,
         CHARACTER_ENCODING_FILTER_URL_PATTERN);
   }
-
-  
-//  @Override
-//  public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//    registry.addResourceHandler("/public/**").addResourceLocations("classpath:/public/");
-//  }
 }

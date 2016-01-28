@@ -45,11 +45,11 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
    */
   @Bean
   public ViewResolver contentNegotiatingViewResolver(ContentNegotiationManager manager) {
-    ContentNegotiatingViewResolver resolver = new ContentNegotiatingViewResolver();
+    final ContentNegotiatingViewResolver resolver = new ContentNegotiatingViewResolver();
     resolver.setContentNegotiationManager(manager);
 
     // Define all possible view resolvers
-    List<ViewResolver> resolvers = new ArrayList<ViewResolver>();
+    final List<ViewResolver> resolvers = new ArrayList<ViewResolver>();
 
     resolvers.add(jsonViewResolver());
     resolvers.add(jspViewResolver());
@@ -73,7 +73,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
    */
   @Bean
   public ViewResolver jspViewResolver() {
-    InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+    final InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
     viewResolver.setViewClass(JstlView.class);
     viewResolver.setPrefix("/WEB-INF/views/");
     viewResolver.setSuffix(".jsp");
@@ -82,7 +82,8 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 
   @Bean(name = "messageSource")
   public ReloadableResourceBundleMessageSource getMessageSource() {
-    ReloadableResourceBundleMessageSource resource = new ReloadableResourceBundleMessageSource();
+    final ReloadableResourceBundleMessageSource resource =
+        new ReloadableResourceBundleMessageSource();
     resource.setBasename("classpath:messages/messages");
     resource.setDefaultEncoding("UTF-8");
     return resource;
@@ -90,9 +91,9 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
-//    registry.addInterceptor(authentictionHandlerInterceptor).addPathPatterns("/**")
-//        .excludePathPatterns("/login/**").excludePathPatterns("/logout/**").excludePathPatterns("**/*.css")
-//        .excludePathPatterns("**/*.html").excludePathPatterns("**/*.png");
+    // registry.addInterceptor(authentictionHandlerInterceptor).addPathPatterns("/**")
+    // .excludePathPatterns("/login/**").excludePathPatterns("/logout/**").excludePathPatterns("**/*.css")
+    // .excludePathPatterns("**/*.html").excludePathPatterns("**/*.png");
   }
 
 }

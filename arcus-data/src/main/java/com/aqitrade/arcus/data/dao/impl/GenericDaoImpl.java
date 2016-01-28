@@ -26,12 +26,12 @@ public class GenericDaoImpl<T, PK extends Serializable> implements GenericDao<T,
    */
   @PersistenceContext(unitName = CoreConstants.PERSISTENCE_UNIT_NAME)
   private EntityManager entityManager;
-  private Class<T> persistentClass;
+  private final Class<T> persistentClass;
 
   /**
    * Constructor that takes in a class to see which type of entity to persist. Use this constructor
    * when subclassing or using dependency injection.
-   * 
+   *
    * @param persistentClass the class type you'd like to persist
    */
   public GenericDaoImpl(final Class<T> persistentClass) {
@@ -40,7 +40,7 @@ public class GenericDaoImpl<T, PK extends Serializable> implements GenericDao<T,
 
   /**
    * Returns JPA {@link EntityManager}
-   * 
+   *
    * @return {@link EntityManager}
    */
   public EntityManager getEntityManager() {
@@ -82,7 +82,7 @@ public class GenericDaoImpl<T, PK extends Serializable> implements GenericDao<T,
    */
   @SuppressWarnings({"unchecked", "rawtypes"})
   public List<T> getAllDistinct() {
-    Collection result = new LinkedHashSet(getAll());
+    final Collection result = new LinkedHashSet(getAll());
     return new ArrayList(result);
   }
 
@@ -90,7 +90,7 @@ public class GenericDaoImpl<T, PK extends Serializable> implements GenericDao<T,
    * {@inheritDoc}
    */
   public T get(PK id) {
-    T entity = this.entityManager.find(this.persistentClass, id);
+    final T entity = this.entityManager.find(this.persistentClass, id);
 
     if (entity == null) {
       throw new ServiceException.EntityNotFoundException("Entity with id '" + id + "' not found");
@@ -103,7 +103,7 @@ public class GenericDaoImpl<T, PK extends Serializable> implements GenericDao<T,
    * {@inheritDoc}
    */
   public boolean exists(PK id) {
-    T entity = this.entityManager.find(this.persistentClass, id);
+    final T entity = this.entityManager.find(this.persistentClass, id);
     return entity != null;
   }
 

@@ -49,7 +49,8 @@ public class GenericServiceImpl<T, D, ID extends Serializable> implements Generi
   @Transactional
   public void create(D dto) {
     try {
-      dao.save(mapper.map(dto, entityClass));
+      T t = dao.save(mapper.map(dto, entityClass));
+      mapper.map(t, dto);
     } catch (Exception e) {
       throw new ServiceException.DataAccessException(ErrorCodes.SAVE_FAILED, e);
     }

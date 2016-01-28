@@ -17,22 +17,22 @@ public class UserDaoImpl extends GenericDaoImpl<UserEntity, Long> implements Use
 
   public UserEntity getUserByUserName(String userName) {
     try {
-      Object result =
+      final Object result =
           getEntityManager().createQuery("select x from UserEntity x where user_name =?1")
               .setParameter(1, userName).getSingleResult();
       return (UserEntity) result;
-    } catch (javax.persistence.NoResultException e) {
+    } catch (final javax.persistence.NoResultException e) {
       return null;
     }
   }
 
   public UserEntity getUserByPhoneNumber(Long phoneNumber) {
     try {
-      Object result =
+      final Object result =
           getEntityManager().createQuery("select x from UserEntity x where phone_number =?1")
               .setParameter(1, phoneNumber).getSingleResult();
       return (UserEntity) result;
-    } catch (javax.persistence.NoResultException e) {
+    } catch (final javax.persistence.NoResultException e) {
       return null;
     }
   }
@@ -43,11 +43,11 @@ public class UserDaoImpl extends GenericDaoImpl<UserEntity, Long> implements Use
 
   public boolean authenticateUser(String userName, String password) {
     try {
-      Object result = getEntityManager()
+      final Object result = getEntityManager()
           .createQuery("select x from UserEntity x where user_name =?1 and password=?2")
           .setParameter(1, userName).setParameter(2, password).getSingleResult();
       return result != null;
-    } catch (javax.persistence.NoResultException e) {
+    } catch (final javax.persistence.NoResultException e) {
       LOG.error(e.getMessage(), e);
       return false;
     }
