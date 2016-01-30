@@ -1,0 +1,37 @@
+Update date : Fri Jan 29 20:38:28 PST 2016
+ 
+ Table 'application' not found in repository
+ (+) table 'application' added
+ 
+ Table 'application_group' not found in repository
+ (+) table 'application_group' added
+ 
+ Table 'broker' not found in repository
+ (+) table 'broker' added
+ 
+ Table 'country' found in repository
+ (=) table 'country' unchanged
+ 
+ Table 'kv_storage' found in repository
+ . Column 'storage_value' : Database type changed to VARCHAR
+ . Column 'storage_value' : JDBC type code changed to 12
+ . Column 'storage_value' : Size changed to 2000
+ . Column 'storage_value' updated
+ . Column 'storage_metadata' : Database type changed to VARCHAR
+ . Column 'storage_metadata' : JDBC type code changed to 12
+ . Column 'storage_metadata' : Size changed to 2000
+ . Column 'storage_metadata' updated
+ (*) table 'kv_storage' updated : 2 change(s)
+ 
+ Table 'portfolio' not found in repository
+ (+) table 'portfolio' added
+ 
+ Table 'user' found in repository
+ (=) table 'user' unchanged
+ 
+ Table 'user_preference' found in repository
+ . Column 'key' deleted
+ . Column 'value' deleted
+ . Column 'preference_key' added
+ . Column 'preference_value' added
+ (*) table 'user_preference' updated : 4 change(s)

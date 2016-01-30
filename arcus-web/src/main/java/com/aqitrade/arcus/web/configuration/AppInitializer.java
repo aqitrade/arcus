@@ -37,9 +37,11 @@ public class AppInitializer implements WebApplicationInitializer {
     container.addListener(new SessionListener());
     container.addListener(new ContextLoaderListener(rootContext));
 
+    // Add UTF-8 Char encoding filter
     EnumSet<DispatcherType> dispatcherTypes =
         EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD);
     configureCharacterEncodingFilter(container, dispatcherTypes);
+    
     // Add Filters
     container.addFilter(JAVA_MELODY_FILTER, MonitoringFilter.class).addMappingForUrlPatterns(null,
         false, "/*");

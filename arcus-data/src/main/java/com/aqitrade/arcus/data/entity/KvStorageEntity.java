@@ -26,6 +26,7 @@ import org.hibernate.annotations.GenericGenerator;
 // Define named queries here
 @NamedQueries({@NamedQuery(name = "KvStorageEntity.countAll",
     query = "SELECT COUNT(x) FROM KvStorageEntity x")})
+@Cacheable(true)
 public class KvStorageEntity implements Serializable {
 
   private static final long serialVersionUID = 1L;

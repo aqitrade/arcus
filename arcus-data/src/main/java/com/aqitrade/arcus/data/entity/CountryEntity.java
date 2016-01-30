@@ -28,6 +28,7 @@ import javax.persistence.*;
 @NamedQueries ( {
   @NamedQuery ( name="CountryEntity.countAll", query="SELECT COUNT(x) FROM CountryEntity x" )
 } )
+@Cacheable(true)
 public class CountryEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
