@@ -13,7 +13,7 @@ import io.swagger.annotations.Api;
 @Api(value = "brokers", description = "Broker APIs")
 @RestController
 @RequestMapping("brokers")
-public class BrokerController extends GenericController<BrokerEntity, BrokerDto, Integer> {
+public class BrokerController extends GenericViewController<BrokerEntity, BrokerDto, Integer> {
 
   @Autowired
   public BrokerController(BrokerService brokerService) {

@@ -82,8 +82,8 @@ public class GenericDaoImpl<T, PK extends Serializable> implements GenericDao<T,
    */
   @SuppressWarnings({"unchecked", "rawtypes"})
   public List<T> getAllDistinct() {
-    final Collection result = new LinkedHashSet(getAll());
-    return new ArrayList(result);
+    return this.entityManager
+        .createQuery("select DISTINCT obj from " + this.persistentClass.getName() + " obj").getResultList();
   }
 
   /**

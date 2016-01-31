@@ -11,26 +11,23 @@ import java.io.Serializable;
 //import javax.validation.constraints.* ;
 //import org.hibernate.validator.constraints.* ;
 
-import java.util.List;
 
 import javax.persistence.*;
 
-import org.hibernate.annotations.Fetch;
-
 /**
- * Persistent class for entity stored in table "application"
+ * Persistent class for entity stored in table "portfolio_application"
  *
  * @author Telosys Tools Generator
  *
  */
 
 @Entity
-@Table(name="application", catalog="arcus" )
+@Table(name="portfolio_application", catalog="arcus" )
 // Define named queries here
 @NamedQueries ( {
-  @NamedQuery ( name="ApplicationEntity.countAll", query="SELECT COUNT(x) FROM ApplicationEntity x" )
+  @NamedQuery ( name="PortfolioApplicationEntity.countAll", query="SELECT COUNT(x) FROM PortfolioApplicationEntity x" )
 } )
-public class ApplicationEntity implements Serializable {
+public class PortfolioApplicationEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -39,74 +36,65 @@ public class ApplicationEntity implements Serializable {
     //----------------------------------------------------------------------
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name="application_id", nullable=false)
-    private Integer    applicationId ;
+    @Column(name="portfolio_application", nullable=false)
+    private Integer    portfolioApplication ;
 
 
     //----------------------------------------------------------------------
     // ENTITY DATA FIELDS 
     //----------------------------------------------------------------------    
-    @Column(name="name", nullable=false, length=45)
-    private String     name         ;
-
-	// "applicationGroupId" (column "application_group_id") is not defined by itself because used as FK in a link 
+	// "portfolioId" (column "portfolio_id") is not defined by itself because used as FK in a link 
+	// "applicationId" (column "application_id") is not defined by itself because used as FK in a link 
 
 
     //----------------------------------------------------------------------
     // ENTITY LINKS ( RELATIONSHIP )
     //----------------------------------------------------------------------
     @ManyToOne
-    @JoinColumn(name="application_group_id", referencedColumnName="application_group_id")
-    private ApplicationGroupEntity applicationGroup;
+    @JoinColumn(name="application_id", referencedColumnName="application_id")
+    private ApplicationEntity application ;
 
-    @OneToMany(fetch=FetchType.EAGER, mappedBy="application", targetEntity=PortfolioApplicationEntity.class)
-    private List<PortfolioApplicationEntity> listOfPortfolioApplication;
+    @ManyToOne
+    @JoinColumn(name="portfolio_id", referencedColumnName="portfolio_id")
+    private PortfolioEntity portfolio   ;
 
 
     //----------------------------------------------------------------------
     // CONSTRUCTOR(S)
     //----------------------------------------------------------------------
-    public ApplicationEntity() {
+    public PortfolioApplicationEntity() {
 		super();
     }
     
     //----------------------------------------------------------------------
     // GETTER & SETTER FOR THE KEY FIELD
     //----------------------------------------------------------------------
-    public void setApplicationId( Integer applicationId ) {
-        this.applicationId = applicationId ;
+    public void setPortfolioApplication( Integer portfolioApplication ) {
+        this.portfolioApplication = portfolioApplication ;
     }
-    public Integer getApplicationId() {
-        return this.applicationId;
+    public Integer getPortfolioApplication() {
+        return this.portfolioApplication;
     }
 
     //----------------------------------------------------------------------
     // GETTERS & SETTERS FOR FIELDS
     //----------------------------------------------------------------------
-    //--- DATABASE MAPPING : name ( VARCHAR ) 
-    public void setName( String name ) {
-        this.name = name;
-    }
-    public String getName() {
-        return this.name;
-    }
-
 
     //----------------------------------------------------------------------
     // GETTERS & SETTERS FOR LINKS
     //----------------------------------------------------------------------
-    public void setApplicationGroup( ApplicationGroupEntity applicationGroup ) {
-        this.applicationGroup = applicationGroup;
+    public void setApplication( ApplicationEntity application ) {
+        this.application = application;
     }
-    public ApplicationGroupEntity getApplicationGroup() {
-        return this.applicationGroup;
+    public ApplicationEntity getApplication() {
+        return this.application;
     }
 
-    public void setListOfPortfolioApplication( List<PortfolioApplicationEntity> listOfPortfolioApplication ) {
-        this.listOfPortfolioApplication = listOfPortfolioApplication;
+    public void setPortfolio( PortfolioEntity portfolio ) {
+        this.portfolio = portfolio;
     }
-    public List<PortfolioApplicationEntity> getListOfPortfolioApplication() {
-        return this.listOfPortfolioApplication;
+    public PortfolioEntity getPortfolio() {
+        return this.portfolio;
     }
 
 
@@ -116,9 +104,8 @@ public class ApplicationEntity implements Serializable {
     public String toString() { 
         StringBuffer sb = new StringBuffer(); 
         sb.append("["); 
-        sb.append(applicationId);
+        sb.append(portfolioApplication);
         sb.append("]:"); 
-        sb.append(name);
         return sb.toString(); 
     } 
 

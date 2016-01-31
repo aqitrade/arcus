@@ -76,15 +76,15 @@ public abstract class ServiceException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 
     public DataAccessException(ErrorCodes errorCode, String message) {
-      super(ErrorCodes.ENTITY_NOT_FOUND, message);
+      super(errorCode, message);
     }
 
     public DataAccessException(ErrorCodes errorCode, String message, Throwable cause) {
-      super(ErrorCodes.ENTITY_NOT_FOUND, message, cause);
+      super(errorCode, message, cause);
     }
 
     public DataAccessException(ErrorCodes errorCode, Throwable cause) {
-      super(ErrorCodes.ENTITY_NOT_FOUND, cause);
+      super(errorCode, cause);
     }
   }
 
@@ -115,6 +115,27 @@ public abstract class ServiceException extends RuntimeException {
 
     public BadRequest(ErrorCodes errorCode) {
       super(errorCode);
+    }
+
+    public BadRequest(ErrorCodes errorCode, String message) {
+      super(errorCode, message);
+    }
+  }
+  
+  public static class UserSignupException extends ServiceException {
+
+    private static final long serialVersionUID = 1L;
+
+    public UserSignupException(ErrorCodes errorCode, String message) {
+      super(errorCode, message);
+    }
+
+    public UserSignupException(ErrorCodes errorCode, String message, Throwable cause) {
+      super(errorCode, message, cause);
+    }
+
+    public UserSignupException(ErrorCodes errorCode, Throwable cause) {
+      super(errorCode, cause);
     }
   }
 }

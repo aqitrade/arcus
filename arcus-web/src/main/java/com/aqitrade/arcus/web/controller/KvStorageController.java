@@ -13,7 +13,7 @@ import io.swagger.annotations.Api;
 @Api(value = "/kv", description = "Key Value Storage APIs")
 @RestController
 @RequestMapping("kv")
-public class KvStorageController extends GenericController<KvStorageEntity, KvStorageDto, Long> {
+public class KvStorageController extends GenericCRUDController<KvStorageEntity, KvStorageDto, Long> {
 
   @Autowired
   public KvStorageController(KvStorageService kvStorageService) {

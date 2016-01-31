@@ -14,11 +14,20 @@ import com.aqitrade.arcus.web.model.ServiceResponse;
 
 import io.swagger.annotations.ApiOperation;
 
-public class GenericController<ENTITY, DTO, ID extends Serializable> {
+/**
+ * Generic CRUD controller to support all basic CRUD operation for an entity.
+ * 
+ * @author pani
+ *
+ * @param <ENTITY> Entity class name
+ * @param <DTO> DTO class
+ * @param <ID> primary key of an entoty
+ */
+public class GenericCRUDController<ENTITY, DTO, ID extends Serializable> {
 
   private GenericService<ENTITY, DTO, ID> genericService;
 
-  public GenericController(GenericService<ENTITY, DTO, ID> genericService) {
+  public GenericCRUDController(GenericService<ENTITY, DTO, ID> genericService) {
     this.genericService = genericService;
   }
 
@@ -47,7 +56,7 @@ public class GenericController<ENTITY, DTO, ID extends Serializable> {
       produces = MediaType.APPLICATION_JSON_VALUE)
   public ServiceResponse<Void> update(@PathVariable ID id, @RequestBody DTO dto) {
     genericService.update(id, dto);
-    return new ServiceResponse<Void>();
+    return ServiceResponse.SUCCESS;
   }
 
   @ApiOperation(value = "Delete", httpMethod = "DELETE")
@@ -55,7 +64,6 @@ public class GenericController<ENTITY, DTO, ID extends Serializable> {
       produces = MediaType.APPLICATION_JSON_VALUE)
   public ServiceResponse<Void> delete(@PathVariable ID id) {
     genericService.delete(id);
-    return new ServiceResponse<Void>();
+    return ServiceResponse.SUCCESS;
   }
-
 }

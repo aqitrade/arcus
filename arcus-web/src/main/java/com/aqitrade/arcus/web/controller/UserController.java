@@ -53,26 +53,19 @@ public class UserController {
   }
 
 
-  @ApiOperation(value = "Create new user", httpMethod = "POST")
-  @RequestMapping(value = "/users", method = RequestMethod.POST, consumes = "application/json")
-  public ServiceResponse<Void> createeUser(@RequestBody UserDto userDto) {
-    userService.create(userDto);
-    return new ServiceResponse<Void>();
-  }
-
   @ApiOperation(value = "Update existing user", httpMethod = "PUT")
   @RequestMapping(value = "/users/{userId}", method = RequestMethod.PUT,
       consumes = "application/json")
   public ServiceResponse<Void> updateUser(@RequestBody UserDto userDto, @PathVariable long userId) {
     userDto.setUserId(userId);
     userService.update(userId, userDto);
-    return new ServiceResponse<Void>();
+    return ServiceResponse.SUCCESS;
   }
 
   @ApiOperation(value = "Delete user by id", httpMethod = "DELETE")
   @RequestMapping(value = "/users/{userId}", method = RequestMethod.DELETE)
   public ServiceResponse<Void> deleteUser(@PathVariable long userId) {
     userService.delete(userId);
-    return new ServiceResponse<Void>();
+    return ServiceResponse.SUCCESS;
   }
 }

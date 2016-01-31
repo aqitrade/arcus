@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Telosys Database Repository --><root>
 <tableList databaseId="0" databaseName="MYSQL" databaseProductName="MySQL" generation="2016-01-27 23:23:25">
+<table catalog="arcus" databaseType="TABLE" javaBean="Account" name="account" schema="">
+<column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="account_id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="INT" inputType="number" javaName="accountId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Account id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="name" dbNotNull="true" dbPosition="2" dbSize="255" dbTypeName="VARCHAR" inputType="text" javaName="name" javaType="java.lang.String" jdbcTypeCode="12" label="Name" maxLength="255" notEmpty="true" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="authentication_id" dbNotNull="true" dbPosition="3" dbSize="65" dbTypeName="VARCHAR" inputType="text" javaName="authenticationId" javaType="java.lang.String" jdbcTypeCode="12" label="Authentication id" maxLength="65" notEmpty="true" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="password" dbNotNull="true" dbPosition="4" dbSize="128" dbTypeName="VARCHAR" inputType="text" javaName="password" javaType="java.lang.String" jdbcTypeCode="12" label="Password" maxLength="128" notEmpty="true" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbForeignKey="true" dbName="portfolio_id" dbNotNull="false" dbPosition="5" dbSize="10" dbTypeName="INT" inputType="number" javaName="portfolioId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Portfolio id" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbForeignKey="true" dbName="broker_id" dbNotNull="true" dbPosition="6" dbSize="10" dbTypeName="INT" inputType="number" javaName="brokerId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Broker id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="status" dbNotNull="true" dbPosition="7" dbSize="9" dbTypeName="ENUM" inputType="text" javaName="status" javaType="java.lang.String" jdbcTypeCode="1" label="Status" maxLength="9" notEmpty="true" notNull="true" selected="true"/>
+<fk name="fk_account_broker1">
+<fkcol colname="broker_id" colref="broker_id" deferrable="7" deleterule="0" sequence="1" tablename="account" tableref="broker" updaterule="0"/>
+</fk>
+<fk name="fk_accout_portfolio1">
+<fkcol colname="portfolio_id" colref="portfolio_id" deferrable="7" deleterule="0" sequence="1" tablename="account" tableref="portfolio" updaterule="0"/>
+</fk>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="fk_accout_portfolio1" id="LINK_FK_fk_accout_portfolio1_O" inverseSideOf="" javaName="portfolio" javaType="Portfolio" joinTableName="" mappedBy="" optional="UNDEFINED" owningSide="true" sourceTableName="account" targetEntity="Portfolio" targetTableName="portfolio" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="portfolio_id" nullable="true" referencedColumnName="portfolio_id" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="fk_account_broker1" id="LINK_FK_fk_account_broker1_O" inverseSideOf="" javaName="broker" javaType="Broker" joinTableName="" mappedBy="" optional="UNDEFINED" owningSide="true" sourceTableName="account" targetEntity="Broker" targetTableName="broker" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="broker_id" nullable="true" referencedColumnName="broker_id" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+</table>
 <table catalog="arcus" databaseType="TABLE" javaBean="Application" name="application" schema="">
 <column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="application_id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="INT" inputType="number" javaName="applicationId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Application id" notNull="true" selected="true"/>
 <column dbComment="" dbDefaultValue="" dbName="name" dbNotNull="true" dbPosition="2" dbSize="45" dbTypeName="VARCHAR" inputType="text" javaName="name" javaType="java.lang.String" jdbcTypeCode="12" label="Name" maxLength="45" notEmpty="true" notNull="true" selected="true"/>
@@ -13,6 +38,7 @@
 <joinColumn insertable="false" name="application_group_id" nullable="true" referencedColumnName="application_group_id" unique="false" updatable="false"/>
 </joinColumns>
 </link>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="fk_portfolio_application_application1" id="LINK_FK_fk_portfolio_application_application1_I" inverseSideOf="LINK_FK_fk_portfolio_application_application1_O" javaName="listOfPortfolioApplication" javaType="java.util.List" joinTableName="" mappedBy="application" optional="UNDEFINED" owningSide="false" sourceTableName="application" targetEntity="PortfolioApplication" targetTableName="portfolio_application" used="true"/>
 </table>
 <table catalog="arcus" databaseType="TABLE" javaBean="ApplicationGroup" name="application_group" schema="">
 <column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="application_group_id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="INT" inputType="number" javaName="applicationGroupId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Application group id" notNull="true" selected="true"/>
@@ -20,9 +46,16 @@
 <column dbComment="" dbDefaultValue="0" dbName="display_order" dbNotNull="true" dbPosition="3" dbSize="5" dbTypeName="SMALLINT" inputType="number" javaName="displayOrder" javaType="java.lang.Short" jdbcTypeCode="5" label="Display order" notNull="true" selected="true"/>
 <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="fk_application_application_group1" id="LINK_FK_fk_application_application_group1_I" inverseSideOf="LINK_FK_fk_application_application_group1_O" javaName="listOfApplication" javaType="java.util.List" joinTableName="" mappedBy="applicationGroup" optional="UNDEFINED" owningSide="false" sourceTableName="application_group" targetEntity="Application" targetTableName="application" used="true"/>
 </table>
+<table catalog="arcus" databaseType="TABLE" javaBean="ApplicationInstrument" name="application_instrument" schema="">
+<column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="application_instrument_id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="applicationInstrumentId" javaType="java.lang.Long" jdbcTypeCode="-5" label="Application instrument id" notNull="true" selected="true"/>
+<column dateType="DT" dbComment="" dbDefaultValue="CURRENT_TIMESTAMP" dbName="create_date" dbNotNull="true" dbPosition="2" dbSize="19" dbTypeName="TIMESTAMP" inputType="" javaName="createDate" javaType="java.util.Date" jdbcTypeCode="93" label="Create date" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="instrument_id" dbNotNull="false" dbPosition="3" dbSize="10" dbTypeName="INT" inputType="number" javaName="instrumentId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Instrument id" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="instrument_type" dbNotNull="false" dbPosition="4" dbSize="5" dbTypeName="ENUM" inputType="text" javaName="instrumentType" javaType="java.lang.String" jdbcTypeCode="1" label="Instrument type" maxLength="5" notNull="false" selected="true"/>
+</table>
 <table catalog="arcus" databaseType="TABLE" javaBean="Broker" name="broker" schema="">
 <column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="broker_id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="INT" inputType="number" javaName="brokerId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Broker id" notNull="true" selected="true"/>
 <column dbComment="" dbDefaultValue="" dbName="broker_name" dbNotNull="true" dbPosition="2" dbSize="45" dbTypeName="VARCHAR" inputType="text" javaName="brokerName" javaType="java.lang.String" jdbcTypeCode="12" label="Broker name" maxLength="45" notEmpty="true" notNull="true" selected="true"/>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="fk_account_broker1" id="LINK_FK_fk_account_broker1_I" inverseSideOf="LINK_FK_fk_account_broker1_O" javaName="listOfAccount" javaType="java.util.List" joinTableName="" mappedBy="broker" optional="UNDEFINED" owningSide="false" sourceTableName="broker" targetEntity="Account" targetTableName="account" used="true"/>
 </table>
 <table catalog="arcus" databaseType="TABLE" javaBean="Country" name="country" schema="">
 <column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="country_id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="countryId" javaType="java.lang.Long" jdbcTypeCode="-5" label="Country id" notNull="true" selected="true"/>
@@ -52,9 +85,32 @@
 <fk name="fk_portfolio_user1">
 <fkcol colname="user_id" colref="user_id" deferrable="7" deleterule="0" sequence="1" tablename="portfolio" tableref="user" updaterule="0"/>
 </fk>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="fk_portfolio_application_portfolio1" id="LINK_FK_fk_portfolio_application_portfolio1_I" inverseSideOf="LINK_FK_fk_portfolio_application_portfolio1_O" javaName="listOfPortfolioApplication" javaType="java.util.List" joinTableName="" mappedBy="portfolio" optional="UNDEFINED" owningSide="false" sourceTableName="portfolio" targetEntity="PortfolioApplication" targetTableName="portfolio_application" used="true"/>
 <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="fk_portfolio_user1" id="LINK_FK_fk_portfolio_user1_O" inverseSideOf="" javaName="user" javaType="User" joinTableName="" mappedBy="" optional="UNDEFINED" owningSide="true" sourceTableName="portfolio" targetEntity="User" targetTableName="user" used="true">
 <joinColumns>
 <joinColumn insertable="false" name="user_id" nullable="true" referencedColumnName="user_id" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="fk_accout_portfolio1" id="LINK_FK_fk_accout_portfolio1_I" inverseSideOf="LINK_FK_fk_accout_portfolio1_O" javaName="listOfAccount" javaType="java.util.List" joinTableName="" mappedBy="portfolio" optional="UNDEFINED" owningSide="false" sourceTableName="portfolio" targetEntity="Account" targetTableName="account" used="true"/>
+</table>
+<table catalog="arcus" databaseType="TABLE" javaBean="PortfolioApplication" name="portfolio_application" schema="">
+<column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="portfolio_application" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="INT" inputType="number" javaName="portfolioApplication" javaType="java.lang.Integer" jdbcTypeCode="4" label="Portfolio application" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbForeignKey="true" dbName="portfolio_id" dbNotNull="true" dbPosition="2" dbSize="10" dbTypeName="INT" inputType="number" javaName="portfolioId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Portfolio id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbForeignKey="true" dbName="application_id" dbNotNull="true" dbPosition="3" dbSize="10" dbTypeName="INT" inputType="number" javaName="applicationId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Application id" notNull="true" selected="true"/>
+<fk name="fk_portfolio_application_application1">
+<fkcol colname="application_id" colref="application_id" deferrable="7" deleterule="0" sequence="1" tablename="portfolio_application" tableref="application" updaterule="0"/>
+</fk>
+<fk name="fk_portfolio_application_portfolio1">
+<fkcol colname="portfolio_id" colref="portfolio_id" deferrable="7" deleterule="0" sequence="1" tablename="portfolio_application" tableref="portfolio" updaterule="0"/>
+</fk>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="fk_portfolio_application_application1" id="LINK_FK_fk_portfolio_application_application1_O" inverseSideOf="" javaName="application" javaType="Application" joinTableName="" mappedBy="" optional="UNDEFINED" owningSide="true" sourceTableName="portfolio_application" targetEntity="Application" targetTableName="application" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="application_id" nullable="true" referencedColumnName="application_id" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="fk_portfolio_application_portfolio1" id="LINK_FK_fk_portfolio_application_portfolio1_O" inverseSideOf="" javaName="portfolio" javaType="Portfolio" joinTableName="" mappedBy="" optional="UNDEFINED" owningSide="true" sourceTableName="portfolio_application" targetEntity="Portfolio" targetTableName="portfolio" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="portfolio_id" nullable="true" referencedColumnName="portfolio_id" unique="false" updatable="false"/>
 </joinColumns>
 </link>
 </table>
@@ -68,8 +124,6 @@
 <column dateType="DT" dbComment="" dbDefaultValue="CURRENT_TIMESTAMP" dbName="create_date" dbNotNull="true" dbPosition="7" dbSize="19" dbTypeName="TIMESTAMP" inputType="" javaName="createDate" javaType="java.util.Date" jdbcTypeCode="93" label="Create date" notNull="true" selected="true"/>
 <column dbComment="" dbDefaultValue="" dbName="phone_number" dbNotNull="true" dbPosition="8" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="phoneNumber" javaType="java.lang.Long" jdbcTypeCode="-5" label="Phone number" notNull="true" selected="true"/>
 <column dbComment="" dbDefaultValue="" dbName="email_id" dbNotNull="false" dbPosition="9" dbSize="45" dbTypeName="VARCHAR" inputType="text" javaName="emailId" javaType="java.lang.String" jdbcTypeCode="12" label="Email id" maxLength="45" notNull="false" selected="true"/>
-<column dbComment="" dbDefaultValue="" dbName="security_code" dbNotNull="false" dbPosition="10" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="securityCode" javaType="java.lang.Long" jdbcTypeCode="-5" label="Security code" notNull="false" selected="true"/>
-<column dateType="DT" dbComment="" dbDefaultValue="" dbName="security_exp_date" dbNotNull="false" dbPosition="11" dbSize="19" dbTypeName="TIMESTAMP" inputType="" javaName="securityExpDate" javaType="java.util.Date" jdbcTypeCode="93" label="Security exp date" notNull="false" selected="true"/>
 <column dbComment="" dbDefaultValue="0" dbName="active_ind" dbNotNull="false" dbPosition="12" dbSize="0" dbTypeName="BIT" inputType="checkbox" javaName="activeInd" javaType="java.lang.Boolean" jdbcTypeCode="-7" label="Active ind" notNull="false" selected="true"/>
 <column dateType="DT" dbComment="" dbDefaultValue="CURRENT_TIMESTAMP" dbName="modify_date" dbNotNull="false" dbPosition="13" dbSize="19" dbTypeName="TIMESTAMP" inputType="" javaName="modifyDate" javaType="java.util.Date" jdbcTypeCode="93" label="Modify date" notNull="false" selected="true"/>
 <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="user_preference_ibfk_1" id="LINK_FK_user_preference_ibfk_1_I" inverseSideOf="LINK_FK_user_preference_ibfk_1_O" javaName="listOfUserPreference" javaType="java.util.List" joinTableName="" mappedBy="user" optional="UNDEFINED" owningSide="false" sourceTableName="user" targetEntity="UserPreference" targetTableName="user_preference" used="true"/>
@@ -87,6 +141,15 @@
 <joinColumn insertable="false" name="user_id" nullable="true" referencedColumnName="user_id" unique="false" updatable="false"/>
 </joinColumns>
 </link>
+</table>
+<table catalog="arcus" databaseType="TABLE" javaBean="UserVerification" name="user_verification" schema="">
+<column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="user_verification_id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="userVerificationId" javaType="java.lang.Long" jdbcTypeCode="-5" label="User verification id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="user_name" dbNotNull="false" dbPosition="2" dbSize="45" dbTypeName="VARCHAR" inputType="text" javaName="userName" javaType="java.lang.String" jdbcTypeCode="12" label="User name" maxLength="45" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="phone_number" dbNotNull="false" dbPosition="3" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="phoneNumber" javaType="java.lang.Long" jdbcTypeCode="-5" label="Phone number" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="email_id" dbNotNull="false" dbPosition="4" dbSize="45" dbTypeName="VARCHAR" inputType="text" javaName="emailId" javaType="java.lang.String" jdbcTypeCode="12" label="Email id" maxLength="45" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="security_code" dbNotNull="false" dbPosition="5" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="securityCode" javaType="java.lang.Long" jdbcTypeCode="-5" label="Security code" notNull="false" selected="true"/>
+<column dateType="DT" dbComment="" dbDefaultValue="" dbName="security_exp_date" dbNotNull="false" dbPosition="6" dbSize="19" dbTypeName="TIMESTAMP" inputType="" javaName="securityExpDate" javaType="java.util.Date" jdbcTypeCode="93" label="Security exp date" notNull="false" selected="true"/>
+<column dateType="DT" dbComment="" dbDefaultValue="CURRENT_TIMESTAMP" dbName="modify_date" dbNotNull="false" dbPosition="7" dbSize="19" dbTypeName="TIMESTAMP" inputType="" javaName="modifyDate" javaType="java.util.Date" jdbcTypeCode="93" label="Modify date" notNull="false" selected="true"/>
 </table>
 </tableList>
 </root>

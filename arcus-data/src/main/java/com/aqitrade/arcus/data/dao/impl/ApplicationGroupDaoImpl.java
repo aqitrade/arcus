@@ -1,5 +1,7 @@
 package com.aqitrade.arcus.data.dao.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.aqitrade.arcus.data.dao.ApplicationGroupDao;
@@ -13,4 +15,7 @@ public class ApplicationGroupDaoImpl extends GenericDaoImpl<ApplicationGroupEnti
     super(ApplicationGroupEntity.class);
   }
 
+  public List<ApplicationGroupEntity> findAllOrderByDisplayOrder() {
+    return getListByQuery("select x from ApplicationGroupEntity x order by x.displayOrder");
+  }
 }

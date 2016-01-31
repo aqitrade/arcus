@@ -18,6 +18,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @JsonInclude(Include.NON_NULL)
 public class ServiceResponse<T> {
 
+  public static ServiceResponse<Void> SUCCESS = new ServiceResponse<Void>();
+
   public enum Status {
     success, error
   }

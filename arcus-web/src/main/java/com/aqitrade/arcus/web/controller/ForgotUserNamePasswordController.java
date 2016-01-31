@@ -40,7 +40,7 @@ public class ForgotUserNamePasswordController {
       consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
   public ServiceResponse<Void> forgotPassword(@RequestParam String userName) {
     forgotUserNamePasswordService.forgotPassword(userName);
-    return new ServiceResponse<Void>();
+    return ServiceResponse.SUCCESS;
   }
 
   /**
@@ -58,7 +58,7 @@ public class ForgotUserNamePasswordController {
   public ServiceResponse<Void> changePassword(@RequestParam String userName,
       @RequestParam int securityCode, @RequestParam String password) {
     forgotUserNamePasswordService.changePassword(userName, securityCode, password);
-    return new ServiceResponse<Void>();
+    return ServiceResponse.SUCCESS;
   }
 
   /**
@@ -75,7 +75,7 @@ public class ForgotUserNamePasswordController {
       consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
   public ServiceResponse<Void> forgotUserName(@RequestParam long phoneNumber) {
     forgotUserNamePasswordService.forgotUserName(phoneNumber);
-    return new ServiceResponse<Void>();
+    return ServiceResponse.SUCCESS;
   }
 
   /**
@@ -92,7 +92,7 @@ public class ForgotUserNamePasswordController {
   public ServiceResponse<Void> changeUserName(@RequestParam long phoneNumber,
       @RequestParam int securityCode, @RequestParam String userName) {
     forgotUserNamePasswordService.changeUserName(phoneNumber, securityCode, userName);
-    return new ServiceResponse<Void>();
+    return ServiceResponse.SUCCESS;
   }
 
 }

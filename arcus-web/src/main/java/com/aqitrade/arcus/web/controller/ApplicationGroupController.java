@@ -10,11 +10,11 @@ import com.aqitrade.arcus.service.ApplicationGroupService;
 
 import io.swagger.annotations.Api;
 
-@Api(value = "application groups", description = "Application group APIs")
+@Api(value = "applicationgroups", description = "Application group APIs")
 @RestController
-@RequestMapping("applications/groups")
+@RequestMapping("applicationgroups")
 public class ApplicationGroupController
-    extends GenericController<ApplicationGroupEntity, ApplicationGroupDto, Integer> {
+    extends GenericViewController<ApplicationGroupEntity, ApplicationGroupDto, Integer> {
 
   @Autowired
   public ApplicationGroupController(ApplicationGroupService applicationGroupService) {

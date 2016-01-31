@@ -76,4 +76,11 @@ public class GenericServiceImpl<T, D, ID extends Serializable> implements Generi
     }
   }
 
+  public List<D> convert(List<T> list) {
+    List<D> result = new ArrayList<D>();
+    for (T t : list) {
+      result.add(mapper.map(t, dtoClass));
+    }
+    return result;
+  }
 }
