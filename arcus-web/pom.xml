@@ -75,7 +75,7 @@
 			<artifactId>bootstrap</artifactId>
 			<version>3.3.5</version>
 		</dependency>
-		
+
 	</dependencies>
 	<build>
 		<pluginManagement>
@@ -98,6 +98,13 @@
 					<configuration>
 						<webApp>
 							<contextPath>/arcus</contextPath>
+							<sessionHandler implementation="org.eclipse.jetty.server.session.SessionHandler">
+								<sessionManager
+									implementation="org.eclipse.jetty.server.session.HashSessionManager">
+									<storeDirectory>${project.basedir}/jetty-sessions</storeDirectory>
+									<idleSavePeriod>1</idleSavePeriod>
+								</sessionManager>
+							</sessionHandler>
 						</webApp>
 					</configuration>
 				</plugin>

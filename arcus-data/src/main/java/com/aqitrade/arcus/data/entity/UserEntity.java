@@ -16,6 +16,9 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 /**
  * Persistent class for entity stored in table "user"
  *
@@ -29,6 +32,9 @@ import javax.persistence.*;
 @NamedQueries ( {
   @NamedQuery ( name="UserEntity.countAll", query="SELECT COUNT(x) FROM UserEntity x" )
 } )
+@Cacheable(true)
+@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
+
 public class UserEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -76,18 +82,6 @@ public class UserEntity implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="modify_date")
     private Date       modifyDate   ;
-
-
-
-    //----------------------------------------------------------------------
-    // ENTITY LINKS ( RELATIONSHIP )
-    //----------------------------------------------------------------------
-    @OneToMany(mappedBy="user", targetEntity=UserPreferenceEntity.class)
-    private List<UserPreferenceEntity> listOfUserPreference;
-
-    @OneToMany(mappedBy="user", targetEntity=PortfolioEntity.class)
-    private List<PortfolioEntity> listOfPortfolio;
-
 
     //----------------------------------------------------------------------
     // CONSTRUCTOR(S)
@@ -188,25 +182,6 @@ public class UserEntity implements Serializable {
     public Date getModifyDate() {
         return this.modifyDate;
     }
-
-
-    //----------------------------------------------------------------------
-    // GETTERS & SETTERS FOR LINKS
-    //----------------------------------------------------------------------
-    public void setListOfUserPreference( List<UserPreferenceEntity> listOfUserPreference ) {
-        this.listOfUserPreference = listOfUserPreference;
-    }
-    public List<UserPreferenceEntity> getListOfUserPreference() {
-        return this.listOfUserPreference;
-    }
-
-    public void setListOfPortfolio( List<PortfolioEntity> listOfPortfolio ) {
-        this.listOfPortfolio = listOfPortfolio;
-    }
-    public List<PortfolioEntity> getListOfPortfolio() {
-        return this.listOfPortfolio;
-    }
-
 
     //----------------------------------------------------------------------
     // toString METHOD

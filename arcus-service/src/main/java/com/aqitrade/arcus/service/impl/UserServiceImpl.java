@@ -28,7 +28,7 @@ public class UserServiceImpl extends GenericServiceImpl<UserEntity, UserDto, Lon
     return userDao.authenticateUser(userName, password);
   }
 
-  public UserEntity getUserByUserName(String userName) {
-    return userDao.getUserByUserName(userName);
+  public UserDto getUserByUserName(String userName) {
+    return convert(userDao.getUserByUserName(userName));
   }
 }

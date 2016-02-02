@@ -17,10 +17,10 @@ public class UserDaoImpl extends GenericDaoImpl<UserEntity, Long> implements Use
 
   public UserEntity getUserByUserName(String userName) {
     try {
-      final Object result =
-          getEntityManager().createQuery("select x from UserEntity x where user_name =?1")
+      final UserEntity entity =
+          getEntityManager().createQuery("select x from UserEntity x where user_name =?1", UserEntity.class)
               .setParameter(1, userName).getSingleResult();
-      return (UserEntity) result;
+      return entity;
     } catch (final javax.persistence.NoResultException e) {
       return null;
     }

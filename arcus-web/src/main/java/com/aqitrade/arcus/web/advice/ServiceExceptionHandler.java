@@ -59,16 +59,17 @@ public class ServiceExceptionHandler extends ResponseEntityExceptionHandler {
   //
 
   @ExceptionHandler({Exception.class})
-  @Override
-  protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body,
-      HttpHeaders headers, HttpStatus status, WebRequest request) {
+  protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, WebRequest request) {
     LOG.error(ex.getMessage(), ex);
     if (body == null || !body.getClass().isAssignableFrom(ServiceResponse.class)) {
       ErrorMessage error = new ErrorMessage(ErrorCodes.INTERNAL_SERVER_HTTP_ERROR.code(),
           ErrorCodes.INTERNAL_SERVER_HTTP_ERROR.message(), ExceptionUtils.getStackTrace(ex));
       body = new ServiceResponse<Void>(error);
     }
-    return super.handleExceptionInternal(ex, body, headers, status, request);
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON);
+
+    return super.handleExceptionInternal(ex, body, headers, HttpStatus.INTERNAL_SERVER_ERROR, request);
   }
 
   @Override

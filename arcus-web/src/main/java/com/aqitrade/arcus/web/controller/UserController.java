@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.aqitrade.arcus.data.dto.PortfolioDto;
 import com.aqitrade.arcus.data.dto.UserDto;
+import com.aqitrade.arcus.service.PortfolioService;
 import com.aqitrade.arcus.service.UserService;
 import com.aqitrade.arcus.web.model.ServiceResponse;
 
@@ -31,11 +33,8 @@ public class UserController {
   @Autowired
   private UserService userService;
 
-  @ApiOperation(value = "List all registered users", httpMethod = "GET")
-  @RequestMapping(value = "/users", method = RequestMethod.GET)
-  public ServiceResponse<List<UserDto>> getUsers() {
-    return new ServiceResponse<List<UserDto>>(userService.findAll());
-  }
+  @Autowired
+  private PortfolioService portfolioService;
 
   @ApiOperation(value = "View user by id", httpMethod = "GET")
   @RequestMapping(value = "/users/{userId}", method = RequestMethod.GET)
@@ -68,4 +67,5 @@ public class UserController {
     userService.delete(userId);
     return ServiceResponse.SUCCESS;
   }
+
 }

@@ -26,8 +26,7 @@ public class ApplicationDaoImpl extends GenericDaoImpl<ApplicationEntity, Intege
 
   public List<ApplicationEntity> getAllApplicationsByGroupId(Integer applicationGroupId) {
     List<ApplicationEntity> list = getEntityManager()
-        .createQuery(
-            "SELECT x FROM ApplicationEntity x where x.applicationGroup.applicationGroupId=:groupId",
+        .createQuery("SELECT x FROM ApplicationEntity x where x.applicationGroupId=:groupId",
             ApplicationEntity.class)
         .setParameter("groupId", applicationGroupId).setHint("org.hibernate.cacheable", "true")
         .getResultList();

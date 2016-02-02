@@ -5,9 +5,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 
 import org.slf4j.Logger;
@@ -64,6 +67,38 @@ public class GenericDaoImpl<T, PK extends Serializable> implements GenericDao<T,
   /**
    * {@inheritDoc}
    */
+  public List<T> getListByQuery(String query, Map<String, Object> parameters) {
+    TypedQuery<T> typedQuery = this.entityManager.createQuery(query, getPersistentClass());
+    for (Entry<String, Object> entry : parameters.entrySet()) {
+      typedQuery.setParameter(entry.getKey(), entry.getValue());
+    }
+    return typedQuery.getResultList();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public List<T> getListByQuery(String query, Map<String, Object> parameters, boolean cacheable) {
+    TypedQuery<T> typedQuery = this.entityManager.createQuery(query, getPersistentClass());
+    for (Entry<String, Object> entry : parameters.entrySet()) {
+      typedQuery.setParameter(entry.getKey(), entry.getValue());
+    }
+    typedQuery.setHint("org.hibernate.cacheable", cacheable);
+    return typedQuery.getResultList();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public List<T> getListByQuery(String query, boolean cacheable) {
+    return this.entityManager.createQuery(query, getPersistentClass())
+        .setHint("org.hibernate.cacheable", cacheable).getResultList();
+  }
+
+
+  /**
+   * {@inheritDoc}
+   */
   public List<T> getListByNamedQuery(String queryName) {
     return this.entityManager.createNamedQuery(queryName, getPersistentClass()).getResultList();
   }
@@ -83,7 +118,8 @@ public class GenericDaoImpl<T, PK extends Serializable> implements GenericDao<T,
   @SuppressWarnings({"unchecked", "rawtypes"})
   public List<T> getAllDistinct() {
     return this.entityManager
-        .createQuery("select DISTINCT obj from " + this.persistentClass.getName() + " obj").getResultList();
+        .createQuery("select DISTINCT obj from " + this.persistentClass.getName() + " obj")
+        .getResultList();
   }
 
   /**

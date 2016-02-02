@@ -5,9 +5,9 @@ public enum ErrorCodes {
   // HTTP error codes
   INTERNAL_SERVER_HTTP_ERROR("500",
       "Unable to complete your request due to internal server error."), HTTP_OPERATION_NOT_SUPPORTED(
-          "405", "Not Supported"), HTTP_NO_HANDLER_METHOD("404",
-              "The requested resource not available"), MEDIA_TYPE_NOT_ACCEPTABLE_HTTP_ERROR("406",
-                  "Media type not acceptable"), MEDIA_TYPE_NOT_SUPPORTED_HTTP_ERROR("415",
+          "405", "Not Supported"), HTTP_UNAUTHORIZED("401", "Unauthorized"), HTTP_NO_HANDLER_METHOD(
+              "404", "The requested resource not available"), MEDIA_TYPE_NOT_ACCEPTABLE_HTTP_ERROR(
+                  "406", "Media type not acceptable"), MEDIA_TYPE_NOT_SUPPORTED_HTTP_ERROR("415",
                       "Media type not supported"), BAD_REQUEST("400", "Invalid/Bad request"),
 
   // Arcus error codes

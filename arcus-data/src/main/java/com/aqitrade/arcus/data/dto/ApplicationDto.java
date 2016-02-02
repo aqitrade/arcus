@@ -8,7 +8,7 @@ public class ApplicationDto implements Serializable {
 
   private Integer applicationId;
   private String name;
-  private ApplicationGroupDto applicationGroup;
+  private Integer applicationGroupId;
 
   /**
    * @return the applicationId
@@ -39,17 +39,18 @@ public class ApplicationDto implements Serializable {
   }
 
   /**
-   * @return the applicationGroup
+   * @return the applicationGroupId
    */
-  public ApplicationGroupDto getApplicationGroup() {
-    return applicationGroup;
+  public Integer getApplicationGroupId() {
+    return applicationGroupId;
   }
 
   /**
-   * @param applicationGroup the applicationGroup to set
+   * @param applicationGroupId the applicationGroupId to set
    */
-  public void setApplicationGroup(ApplicationGroupDto applicationGroup) {
-    this.applicationGroup = applicationGroup;
+  public void setApplicationGroupId(Integer applicationGroupId) {
+    this.applicationGroupId = applicationGroupId;
   }
+
 
 }

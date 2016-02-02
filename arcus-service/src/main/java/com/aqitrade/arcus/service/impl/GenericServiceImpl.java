@@ -83,4 +83,9 @@ public class GenericServiceImpl<T, D, ID extends Serializable> implements Generi
     }
     return result;
   }
+  
+  public D convert(T t) {
+    return mapper.map(t, dtoClass);
+  }
+
 }

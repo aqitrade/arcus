@@ -121,7 +121,28 @@ public abstract class ServiceException extends RuntimeException {
       super(errorCode, message);
     }
   }
-  
+
+  public static class Unauthorized extends ServiceException {
+
+    private static final long serialVersionUID = 1L;
+
+    public Unauthorized(String message) {
+      super(ErrorCodes.NOTIFICATION_FAILED, message);
+    }
+
+    public Unauthorized(String message, Throwable cause) {
+      super(ErrorCodes.NOTIFICATION_FAILED, message, cause);
+    }
+
+    public Unauthorized(ErrorCodes errorCode) {
+      super(errorCode);
+    }
+
+    public Unauthorized(ErrorCodes errorCode, String message) {
+      super(errorCode, message);
+    }
+  }
+
   public static class UserSignupException extends ServiceException {
 
     private static final long serialVersionUID = 1L;

@@ -9,5 +9,5 @@ public interface UserService extends GenericService<UserEntity, UserDto, Long>{
 
   boolean authenticateUser(String userName, String password);
   
-  UserEntity getUserByUserName(String userName);
+  UserDto getUserByUserName(String userName);
 }

@@ -12,6 +12,9 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 /**
  * Persistent class for entity stored in table "broker"
  *
@@ -25,6 +28,8 @@ import javax.persistence.*;
 @NamedQueries({
     @NamedQuery(name = "BrokerEntity.countAll", query = "SELECT COUNT(x) FROM BrokerEntity x")})
 @Cacheable(true)
+@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
+
 public class BrokerEntity implements Serializable {
 
   private static final long serialVersionUID = 1L;

@@ -14,6 +14,9 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 /**
  * Persistent class for entity stored in table "country"
  *
@@ -27,6 +30,8 @@ import javax.persistence.*;
 @NamedQueries({
     @NamedQuery(name = "CountryEntity.countAll", query = "SELECT COUNT(x) FROM CountryEntity x")})
 @Cacheable(true)
+@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
+
 public class CountryEntity implements Serializable {
 
   private static final long serialVersionUID = 1L;

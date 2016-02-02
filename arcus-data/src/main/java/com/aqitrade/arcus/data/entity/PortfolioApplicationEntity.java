@@ -37,7 +37,7 @@ public class PortfolioApplicationEntity implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name="portfolio_application", nullable=false)
-    private Integer    portfolioApplication ;
+    private Integer    portfolioApplicationId ;
 
 
     //----------------------------------------------------------------------
@@ -50,13 +50,11 @@ public class PortfolioApplicationEntity implements Serializable {
     //----------------------------------------------------------------------
     // ENTITY LINKS ( RELATIONSHIP )
     //----------------------------------------------------------------------
-    @ManyToOne
-    @JoinColumn(name="application_id", referencedColumnName="application_id")
-    private ApplicationEntity application ;
+    @Column(name="application_id", nullable=false)
+    private Integer applicationId;
 
-    @ManyToOne
-    @JoinColumn(name="portfolio_id", referencedColumnName="portfolio_id")
-    private PortfolioEntity portfolio   ;
+    @Column(name="portfolio_id", nullable=false)
+    private Integer portfolioId   ;
 
 
     //----------------------------------------------------------------------
@@ -65,48 +63,55 @@ public class PortfolioApplicationEntity implements Serializable {
     public PortfolioApplicationEntity() {
 		super();
     }
+
+
+    /**
+     * @return the portfolioApplicationId
+     */
+    public Integer getPortfolioApplicationId() {
+      return portfolioApplicationId;
+    }
+
+
+    /**
+     * @param portfolioApplicationId the portfolioApplicationId to set
+     */
+    public void setPortfolioApplicationId(Integer portfolioApplicationId) {
+      this.portfolioApplicationId = portfolioApplicationId;
+    }
+
+
+    /**
+     * @return the applicationId
+     */
+    public Integer getApplicationId() {
+      return applicationId;
+    }
+
+
+    /**
+     * @param applicationId the applicationId to set
+     */
+    public void setApplicationId(Integer applicationId) {
+      this.applicationId = applicationId;
+    }
+
+
+    /**
+     * @return the portfolioId
+     */
+    public Integer getPortfolioId() {
+      return portfolioId;
+    }
+
+
+    /**
+     * @param portfolioId the portfolioId to set
+     */
+    public void setPortfolioId(Integer portfolioId) {
+      this.portfolioId = portfolioId;
+    }
     
-    //----------------------------------------------------------------------
-    // GETTER & SETTER FOR THE KEY FIELD
-    //----------------------------------------------------------------------
-    public void setPortfolioApplication( Integer portfolioApplication ) {
-        this.portfolioApplication = portfolioApplication ;
-    }
-    public Integer getPortfolioApplication() {
-        return this.portfolioApplication;
-    }
-
-    //----------------------------------------------------------------------
-    // GETTERS & SETTERS FOR FIELDS
-    //----------------------------------------------------------------------
-
-    //----------------------------------------------------------------------
-    // GETTERS & SETTERS FOR LINKS
-    //----------------------------------------------------------------------
-    public void setApplication( ApplicationEntity application ) {
-        this.application = application;
-    }
-    public ApplicationEntity getApplication() {
-        return this.application;
-    }
-
-    public void setPortfolio( PortfolioEntity portfolio ) {
-        this.portfolio = portfolio;
-    }
-    public PortfolioEntity getPortfolio() {
-        return this.portfolio;
-    }
-
-
-    //----------------------------------------------------------------------
-    // toString METHOD
-    //----------------------------------------------------------------------
-    public String toString() { 
-        StringBuffer sb = new StringBuffer(); 
-        sb.append("["); 
-        sb.append(portfolioApplication);
-        sb.append("]:"); 
-        return sb.toString(); 
-    } 
+  
 
 }

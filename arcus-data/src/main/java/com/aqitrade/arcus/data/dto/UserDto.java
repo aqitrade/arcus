@@ -1,8 +1,7 @@
 package com.aqitrade.arcus.data.dto;
 
-import java.util.Date;
+import java.io.Serializable;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -13,7 +12,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  *
  */
 @JsonInclude(Include.NON_NULL)
-public class UserDto {
+public class UserDto implements Serializable {
+  private static final long serialVersionUID = -6986662084151454606L;
   private Long userId;
   private String userName;
   private String firstName;

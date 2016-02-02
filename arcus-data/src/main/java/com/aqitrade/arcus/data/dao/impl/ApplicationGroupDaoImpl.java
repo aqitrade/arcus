@@ -16,6 +16,6 @@ public class ApplicationGroupDaoImpl extends GenericDaoImpl<ApplicationGroupEnti
   }
 
   public List<ApplicationGroupEntity> findAllOrderByDisplayOrder() {
-    return getListByQuery("select x from ApplicationGroupEntity x order by x.displayOrder");
+    return getListByQuery("select x from ApplicationGroupEntity x order by x.displayOrder", true);
   }
 }

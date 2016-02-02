@@ -28,6 +28,7 @@ import javax.persistence.*;
 @NamedQueries ( {
   @NamedQuery ( name="ApplicationGroupEntity.countAll", query="SELECT COUNT(x) FROM ApplicationGroupEntity x" )
 } )
+@Cacheable(true)
 public class ApplicationGroupEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;

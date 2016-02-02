@@ -91,9 +91,10 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
-    // registry.addInterceptor(authentictionHandlerInterceptor).addPathPatterns("/**")
-    // .excludePathPatterns("/login/**").excludePathPatterns("/logout/**").excludePathPatterns("**/*.css")
-    // .excludePathPatterns("**/*.html").excludePathPatterns("**/*.png");
+    registry.addInterceptor(authentictionHandlerInterceptor).addPathPatterns("/**")
+        .excludePathPatterns("/login/**").excludePathPatterns("/logout/**")
+        .excludePathPatterns("**/*.css").excludePathPatterns("**/*.html")
+        .excludePathPatterns("**/*.png");
   }
 
 }
