@@ -18,6 +18,9 @@ import com.aqitrade.arcus.data.dto.PortfolioSummaryDto;
 import com.aqitrade.arcus.service.PortfolioService;
 import com.aqitrade.arcus.web.model.ServiceResponse;
 
+import io.swagger.annotations.Api;
+
+@Api(value = "/portfolio", description = "User Portfolio APIs")
 @RestController
 public class UserPortfolioController {
 
