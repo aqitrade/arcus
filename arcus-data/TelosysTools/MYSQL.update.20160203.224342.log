@@ -1,0 +1,46 @@
+Update date : Wed Feb 03 22:43:42 PST 2016
+ 
+ Table 'account' found in repository
+ (=) table 'account' unchanged
+ 
+ Table 'application' found in repository
+ (=) table 'application' unchanged
+ 
+ Table 'application_group' found in repository
+ (=) table 'application_group' unchanged
+ 
+ Table 'application_instrument' found in repository
+ (=) table 'application_instrument' unchanged
+ 
+ Table 'application_property' found in repository
+ (=) table 'application_property' unchanged
+ 
+ Table 'broker' found in repository
+ (=) table 'broker' unchanged
+ 
+ Table 'country' found in repository
+ (=) table 'country' unchanged
+ 
+ Table 'instrument' found in repository
+ (=) table 'instrument' unchanged
+ 
+ Table 'kv_storage' found in repository
+ (=) table 'kv_storage' unchanged
+ 
+ Table 'portfolio' found in repository
+ (=) table 'portfolio' unchanged
+ 
+ Table 'portfolio_application' found in repository
+ (=) table 'portfolio_application' unchanged
+ 
+ Table 'portfolio_instrument' found in repository
+ (=) table 'portfolio_instrument' unchanged
+ 
+ Table 'user' found in repository
+ (=) table 'user' unchanged
+ 
+ Table 'user_preference' found in repository
+ (=) table 'user_preference' unchanged
+ 
+ Table 'user_verification' found in repository
+ (=) table 'user_verification' unchanged

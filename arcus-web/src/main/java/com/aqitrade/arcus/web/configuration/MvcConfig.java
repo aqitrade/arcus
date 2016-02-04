@@ -21,6 +21,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 import com.aqitrade.arcus.web.handler.AuthentictionHandlerInterceptor;
+import com.aqitrade.arcus.web.handler.SessionHandler;
 import com.aqitrade.arcus.web.viewresolver.JsonViewResolver;
 
 @Configuration
@@ -31,6 +32,9 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 
   @Autowired
   private AuthentictionHandlerInterceptor authentictionHandlerInterceptor;
+
+  @Autowired
+  private SessionHandler sessionInterceptor;
 
   /*
    * Configure ContentNegotiationManager
@@ -93,8 +97,9 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
   public void addInterceptors(InterceptorRegistry registry) {
     registry.addInterceptor(authentictionHandlerInterceptor).addPathPatterns("/**")
         .excludePathPatterns("/login/**").excludePathPatterns("/logout/**")
-        .excludePathPatterns("**/*.css").excludePathPatterns("**/*.html")
-        .excludePathPatterns("**/*.png");
+        .excludePathPatterns("**/*.css").excludePathPatterns("**/*.png");
+
+    registry.addInterceptor(sessionInterceptor);
   }
 
 }

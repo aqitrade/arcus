@@ -5,4 +5,9 @@
 <property name="password" value="aqidbmaster"/>
 <metadata catalog="" schema="TO_BE_DEFINED" table-name-exclude="" table-name-include="" table-name-pattern="%" table-types="TABLE"/>
 </db>
+<db dialect="org.hibernate.dialect.MySQLDialect" driver="com.mysql.jdbc.Driver" id="1" isolationLevel="" name="MYSQL" poolSize="1" typeName="MYSQL" url="jdbc:mysql://aqitradedbinstance.cswsc7o7elm8.us-west-2.rds.amazonaws.com:3306/arcus">
+<property name="user" value="aqidbmaster"/>
+<property name="password" value="aqidbmaster"/>
+<metadata catalog="" schema="TO_BE_DEFINED" table-name-exclude="" table-name-include="" table-name-pattern="%" table-types="TABLE"/>
+</db>
 </databases>

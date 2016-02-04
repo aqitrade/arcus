@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aqitrade.arcus.core.context.UserContext;
+import com.aqitrade.arcus.data.dto.AccountDto;
 import com.aqitrade.arcus.data.dto.PortfolioApplicationDto;
 import com.aqitrade.arcus.data.dto.PortfolioDto;
+import com.aqitrade.arcus.data.dto.PortfolioInstrumentDto;
 import com.aqitrade.arcus.data.dto.PortfolioSummaryDto;
 import com.aqitrade.arcus.service.PortfolioService;
 import com.aqitrade.arcus.web.model.ServiceResponse;
@@ -53,5 +55,39 @@ public class UserPortfolioController {
     return new ServiceResponse<List<PortfolioApplicationDto>>(
         portfolioService.getPortfolioApplications(portfolioId));
   }
+
+  @RequestMapping(value = "portfolios/{portfolioId}/applications", method = RequestMethod.POST)
+  public ServiceResponse<Void> savePortfolioApplication(
+      @RequestBody PortfolioApplicationDto portfolioApplicationDto) {
+    portfolioService.savePortfolioApplication(portfolioApplicationDto);
+    return ServiceResponse.SUCCESS;
+  }
+
+  @RequestMapping(value = "portfolios/{portfolioId}/accounts", method = RequestMethod.GET)
+  public ServiceResponse<List<AccountDto>> getPortfolioAccounts(@PathVariable int portfolioId) {
+    return new ServiceResponse<List<AccountDto>>(
+        portfolioService.getPortfolioAccounts(portfolioId));
+  }
+
+  @RequestMapping(value = "portfolios/{portfolioId}/accounts", method = RequestMethod.POST)
+  public ServiceResponse<Void> savePortfolioAccounts(@RequestBody AccountDto accountDto) {
+    portfolioService.savePortfolioAccount(accountDto);
+    return ServiceResponse.SUCCESS;
+  }
+
+  @RequestMapping(value = "portfolios/{portfolioId}/instruments", method = RequestMethod.GET)
+  public ServiceResponse<List<PortfolioInstrumentDto>> getPortfolioInstruments(
+      @PathVariable int portfolioId) {
+    return new ServiceResponse<List<PortfolioInstrumentDto>>(
+        portfolioService.getPortfolioInstruments(portfolioId));
+  }
+
+  @RequestMapping(value = "portfolios/{portfolioId}/instruments", method = RequestMethod.POST)
+  public ServiceResponse<Void> savePortfolioInstruments(@RequestBody PortfolioInstrumentDto portfolioInstrumentDto) {
+    portfolioService.savePortfolioInstrument(portfolioInstrumentDto);
+    return ServiceResponse.SUCCESS;
+  }
+
+
 
 }

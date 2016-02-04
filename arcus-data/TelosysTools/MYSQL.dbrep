@@ -30,9 +30,11 @@
 <column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="application_id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="INT" inputType="number" javaName="applicationId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Application id" notNull="true" selected="true"/>
 <column dbComment="" dbDefaultValue="" dbName="name" dbNotNull="true" dbPosition="2" dbSize="45" dbTypeName="VARCHAR" inputType="text" javaName="name" javaType="java.lang.String" jdbcTypeCode="12" label="Name" maxLength="45" notEmpty="true" notNull="true" selected="true"/>
 <column dbComment="" dbDefaultValue="" dbForeignKey="true" dbName="application_group_id" dbNotNull="true" dbPosition="3" dbSize="10" dbTypeName="INT" inputType="number" javaName="applicationGroupId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Application group id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="description" dbNotNull="false" dbPosition="4" dbSize="4000" dbTypeName="VARCHAR" inputType="text" javaName="description" javaType="java.lang.String" jdbcTypeCode="12" label="Description" maxLength="4000" notNull="false" selected="true"/>
 <fk name="fk_application_application_group1">
 <fkcol colname="application_group_id" colref="application_group_id" deferrable="7" deleterule="0" sequence="1" tablename="application" tableref="application_group" updaterule="0"/>
 </fk>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="fk_application_property_application1" id="LINK_FK_fk_application_property_application1_I" inverseSideOf="LINK_FK_fk_application_property_application1_O" javaName="listOfApplicationProperty" javaType="java.util.List" joinTableName="" mappedBy="application" optional="UNDEFINED" owningSide="false" sourceTableName="application" targetEntity="ApplicationProperty" targetTableName="application_property" used="true"/>
 <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="fk_application_application_group1" id="LINK_FK_fk_application_application_group1_O" inverseSideOf="" javaName="applicationGroup" javaType="ApplicationGroup" joinTableName="" mappedBy="" optional="UNDEFINED" owningSide="true" sourceTableName="application" targetEntity="ApplicationGroup" targetTableName="application_group" used="true">
 <joinColumns>
 <joinColumn insertable="false" name="application_group_id" nullable="true" referencedColumnName="application_group_id" unique="false" updatable="false"/>
@@ -52,6 +54,21 @@
 <column dbComment="" dbDefaultValue="" dbName="instrument_id" dbNotNull="false" dbPosition="3" dbSize="10" dbTypeName="INT" inputType="number" javaName="instrumentId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Instrument id" notNull="false" selected="true"/>
 <column dbComment="" dbDefaultValue="" dbName="instrument_type" dbNotNull="false" dbPosition="4" dbSize="5" dbTypeName="ENUM" inputType="text" javaName="instrumentType" javaType="java.lang.String" jdbcTypeCode="1" label="Instrument type" maxLength="5" notNull="false" selected="true"/>
 </table>
+<table catalog="arcus" databaseType="TABLE" javaBean="ApplicationProperty" name="application_property" schema="">
+<column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="application_property_id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="INT" inputType="number" javaName="applicationPropertyId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Application property id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="key" dbNotNull="true" dbPosition="2" dbSize="128" dbTypeName="VARCHAR" inputType="text" javaName="key" javaType="java.lang.String" jdbcTypeCode="12" label="Key" maxLength="128" notEmpty="true" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="value" dbNotNull="true" dbPosition="3" dbSize="65535" dbTypeName="BLOB" inputType="" javaName="value" javaType="byte[]" jdbcTypeCode="-4" label="Value" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbForeignKey="true" dbName="application_id" dbNotNull="false" dbPosition="4" dbSize="10" dbTypeName="INT" inputType="number" javaName="applicationId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Application id" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="text/plain" dbName="type" dbNotNull="true" dbPosition="5" dbSize="155" dbTypeName="VARCHAR" inputType="text" javaName="type" javaType="java.lang.String" jdbcTypeCode="12" label="Type" maxLength="155" notEmpty="true" notNull="true" selected="true"/>
+<fk name="fk_application_property_application1">
+<fkcol colname="application_id" colref="application_id" deferrable="7" deleterule="0" sequence="1" tablename="application_property" tableref="application" updaterule="0"/>
+</fk>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="fk_application_property_application1" id="LINK_FK_fk_application_property_application1_O" inverseSideOf="" javaName="application" javaType="Application" joinTableName="" mappedBy="" optional="UNDEFINED" owningSide="true" sourceTableName="application_property" targetEntity="Application" targetTableName="application" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="application_id" nullable="true" referencedColumnName="application_id" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+</table>
 <table catalog="arcus" databaseType="TABLE" javaBean="Broker" name="broker" schema="">
 <column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="broker_id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="INT" inputType="number" javaName="brokerId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Broker id" notNull="true" selected="true"/>
 <column dbComment="" dbDefaultValue="" dbName="broker_name" dbNotNull="true" dbPosition="2" dbSize="45" dbTypeName="VARCHAR" inputType="text" javaName="brokerName" javaType="java.lang.String" jdbcTypeCode="12" label="Broker name" maxLength="45" notEmpty="true" notNull="true" selected="true"/>
@@ -66,6 +83,28 @@
 <column dbComment="" dbDefaultValue="" dbName="numcode" dbNotNull="false" dbPosition="6" dbSize="5" dbTypeName="SMALLINT" inputType="number" javaName="numcode" javaType="java.lang.Short" jdbcTypeCode="5" label="Numcode" notNull="false" selected="true"/>
 <column dbComment="" dbDefaultValue="" dbName="phonecode" dbNotNull="true" dbPosition="7" dbSize="10" dbTypeName="INT" inputType="number" javaName="phonecode" javaType="java.lang.Integer" jdbcTypeCode="4" label="Phonecode" notNull="true" selected="true"/>
 <column dateType="DT" dbComment="" dbDefaultValue="CURRENT_TIMESTAMP" dbName="create_date" dbNotNull="true" dbPosition="8" dbSize="19" dbTypeName="TIMESTAMP" inputType="" javaName="createDate" javaType="java.util.Date" jdbcTypeCode="93" label="Create date" notNull="true" selected="true"/>
+</table>
+<table catalog="arcus" databaseType="TABLE" javaBean="Instrument" name="instrument" schema="">
+<column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="instrument_id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="INT" inputType="number" javaName="instrumentId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Instrument id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="symbol" dbNotNull="true" dbPosition="2" dbSize="45" dbTypeName="VARCHAR" inputType="text" javaName="symbol" javaType="java.lang.String" jdbcTypeCode="12" label="Symbol" maxLength="45" notEmpty="true" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="name" dbNotNull="true" dbPosition="3" dbSize="65" dbTypeName="VARCHAR" inputType="text" javaName="name" javaType="java.lang.String" jdbcTypeCode="12" label="Name" maxLength="65" notEmpty="true" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="price" dbNotNull="true" dbPosition="4" dbSize="22" dbTypeName="DOUBLE" inputType="number" javaName="price" javaType="java.lang.Double" jdbcTypeCode="8" label="Price" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="volume" dbNotNull="true" dbPosition="5" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="volume" javaType="java.lang.Long" jdbcTypeCode="-5" label="Volume" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="0" dbName="open_price" dbNotNull="true" dbPosition="6" dbSize="22" dbTypeName="DOUBLE" inputType="number" javaName="openPrice" javaType="java.lang.Double" jdbcTypeCode="8" label="Open price" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="close_price" dbNotNull="true" dbPosition="7" dbSize="22" dbTypeName="DOUBLE" inputType="number" javaName="closePrice" javaType="java.lang.Double" jdbcTypeCode="8" label="Close price" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="high_price" dbNotNull="true" dbPosition="8" dbSize="22" dbTypeName="DOUBLE" inputType="number" javaName="highPrice" javaType="java.lang.Double" jdbcTypeCode="8" label="High price" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="low_price" dbNotNull="true" dbPosition="9" dbSize="22" dbTypeName="DOUBLE" inputType="number" javaName="lowPrice" javaType="java.lang.Double" jdbcTypeCode="8" label="Low price" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="high_limit" dbNotNull="true" dbPosition="10" dbSize="22" dbTypeName="DOUBLE" inputType="number" javaName="highLimit" javaType="java.lang.Double" jdbcTypeCode="8" label="High limit" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="low_limit" dbNotNull="true" dbPosition="11" dbSize="22" dbTypeName="DOUBLE" inputType="number" javaName="lowLimit" javaType="java.lang.Double" jdbcTypeCode="8" label="Low limit" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="type" dbNotNull="true" dbPosition="12" dbSize="6" dbTypeName="ENUM" inputType="text" javaName="type" javaType="java.lang.String" jdbcTypeCode="1" label="Type" maxLength="6" notEmpty="true" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="margin_rate" dbNotNull="true" dbPosition="13" dbSize="22" dbTypeName="DOUBLE" inputType="number" javaName="marginRate" javaType="java.lang.Double" jdbcTypeCode="8" label="Margin rate" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="commission_rate" dbNotNull="true" dbPosition="14" dbSize="22" dbTypeName="DOUBLE" inputType="number" javaName="commissionRate" javaType="java.lang.Double" jdbcTypeCode="8" label="Commission rate" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="settlement_price" dbNotNull="true" dbPosition="15" dbSize="22" dbTypeName="DOUBLE" inputType="number" javaName="settlementPrice" javaType="java.lang.Double" jdbcTypeCode="8" label="Settlement price" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="unit_size" dbNotNull="true" dbPosition="16" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="unitSize" javaType="java.lang.Long" jdbcTypeCode="-5" label="Unit size" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="bid" dbNotNull="true" dbPosition="17" dbSize="22" dbTypeName="DOUBLE" inputType="number" javaName="bid" javaType="java.lang.Double" jdbcTypeCode="8" label="Bid" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="ask" dbNotNull="true" dbPosition="18" dbSize="22" dbTypeName="DOUBLE" inputType="number" javaName="ask" javaType="java.lang.Double" jdbcTypeCode="8" label="Ask" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="exchange_id" dbNotNull="true" dbPosition="19" dbSize="45" dbTypeName="VARCHAR" inputType="text" javaName="exchangeId" javaType="java.lang.String" jdbcTypeCode="12" label="Exchange id" maxLength="45" notEmpty="true" notNull="true" selected="true"/>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="fk_user_stocks_stocks1" id="LINK_FK_fk_user_stocks_stocks1_I" inverseSideOf="LINK_FK_fk_user_stocks_stocks1_O" javaName="listOfPortfolioInstrument" javaType="java.util.List" joinTableName="" mappedBy="instrument" optional="UNDEFINED" owningSide="false" sourceTableName="instrument" targetEntity="PortfolioInstrument" targetTableName="portfolio_instrument" used="true"/>
 </table>
 <table catalog="arcus" databaseType="TABLE" javaBean="KvStorage" name="kv_storage" schema="">
 <column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="kv_storage_id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="kvStorageId" javaType="java.lang.Long" jdbcTypeCode="-5" label="Kv storage id" notNull="true" selected="true"/>
@@ -91,6 +130,7 @@
 <joinColumn insertable="false" name="user_id" nullable="true" referencedColumnName="user_id" unique="false" updatable="false"/>
 </joinColumns>
 </link>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="fk_portfolio_stocks_portfolio1" id="LINK_FK_fk_portfolio_stocks_portfolio1_I" inverseSideOf="LINK_FK_fk_portfolio_stocks_portfolio1_O" javaName="listOfPortfolioInstrument" javaType="java.util.List" joinTableName="" mappedBy="portfolio" optional="UNDEFINED" owningSide="false" sourceTableName="portfolio" targetEntity="PortfolioInstrument" targetTableName="portfolio_instrument" used="true"/>
 <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="fk_accout_portfolio1" id="LINK_FK_fk_accout_portfolio1_I" inverseSideOf="LINK_FK_fk_accout_portfolio1_O" javaName="listOfAccount" javaType="java.util.List" joinTableName="" mappedBy="portfolio" optional="UNDEFINED" owningSide="false" sourceTableName="portfolio" targetEntity="Account" targetTableName="account" used="true"/>
 </table>
 <table catalog="arcus" databaseType="TABLE" javaBean="PortfolioApplication" name="portfolio_application" schema="">
@@ -109,6 +149,30 @@
 </joinColumns>
 </link>
 <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="fk_portfolio_application_portfolio1" id="LINK_FK_fk_portfolio_application_portfolio1_O" inverseSideOf="" javaName="portfolio" javaType="Portfolio" joinTableName="" mappedBy="" optional="UNDEFINED" owningSide="true" sourceTableName="portfolio_application" targetEntity="Portfolio" targetTableName="portfolio" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="portfolio_id" nullable="true" referencedColumnName="portfolio_id" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+</table>
+<table catalog="arcus" databaseType="TABLE" javaBean="PortfolioInstrument" name="portfolio_instrument" schema="">
+<column dbAutoIncremented="true" dbComment="" dbDefaultValue="" dbName="portfolio_instrument_id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="19" dbTypeName="BIGINT" inputType="number" javaName="portfolioInstrumentId" javaType="java.lang.Long" jdbcTypeCode="-5" label="Portfolio instrument id" notNull="true" selected="true"/>
+<column dateType="DT" dbComment="" dbDefaultValue="CURRENT_TIMESTAMP" dbName="create_date" dbNotNull="true" dbPosition="2" dbSize="19" dbTypeName="TIMESTAMP" inputType="" javaName="createDate" javaType="java.util.Date" jdbcTypeCode="93" label="Create date" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="avg_price" dbNotNull="true" dbPosition="3" dbSize="22" dbTypeName="DOUBLE" inputType="number" javaName="avgPrice" javaType="java.lang.Double" jdbcTypeCode="8" label="Avg price" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="qty" dbNotNull="true" dbPosition="4" dbSize="22" dbTypeName="DOUBLE" inputType="number" javaName="qty" javaType="java.lang.Double" jdbcTypeCode="8" label="Qty" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbForeignKey="true" dbName="instrument_id" dbNotNull="false" dbPosition="5" dbSize="10" dbTypeName="INT" inputType="number" javaName="instrumentId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Instrument id" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbForeignKey="true" dbName="portfolio_id" dbNotNull="true" dbPosition="6" dbSize="10" dbTypeName="INT" inputType="number" javaName="portfolioId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Portfolio id" notNull="true" selected="true"/>
+<fk name="fk_portfolio_stocks_portfolio1">
+<fkcol colname="portfolio_id" colref="portfolio_id" deferrable="7" deleterule="0" sequence="1" tablename="portfolio_instrument" tableref="portfolio" updaterule="0"/>
+</fk>
+<fk name="fk_user_stocks_stocks1">
+<fkcol colname="instrument_id" colref="instrument_id" deferrable="7" deleterule="0" sequence="1" tablename="portfolio_instrument" tableref="instrument" updaterule="0"/>
+</fk>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="fk_user_stocks_stocks1" id="LINK_FK_fk_user_stocks_stocks1_O" inverseSideOf="" javaName="instrument" javaType="Instrument" joinTableName="" mappedBy="" optional="UNDEFINED" owningSide="true" sourceTableName="portfolio_instrument" targetEntity="Instrument" targetTableName="instrument" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="instrument_id" nullable="true" referencedColumnName="instrument_id" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="fk_portfolio_stocks_portfolio1" id="LINK_FK_fk_portfolio_stocks_portfolio1_O" inverseSideOf="" javaName="portfolio" javaType="Portfolio" joinTableName="" mappedBy="" optional="UNDEFINED" owningSide="true" sourceTableName="portfolio_instrument" targetEntity="Portfolio" targetTableName="portfolio" used="true">
 <joinColumns>
 <joinColumn insertable="false" name="portfolio_id" nullable="true" referencedColumnName="portfolio_id" unique="false" updatable="false"/>
 </joinColumns>
